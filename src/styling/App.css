@@ -1,0 +1,56 @@
+.App {
+  text-align: center;
+}
+
+a:link{
+  color:aliceblue;
+}
+
+a:visited{
+  color: aliceblue;
+}
+
+.card {
+  width: 18rem;
+  background-color: #282c34;
+  
+}
+
+.Welcome-text {
+  color: aliceblue;
+}
+
+.card-center{
+  padding-top: 10%;
+  padding-left: 30%;
+  padding-right: 50%;
+}
+
+
+.card-body {
+  text-align: left;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
