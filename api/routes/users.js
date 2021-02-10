@@ -14,16 +14,9 @@ eApp.use(bodyParser.urlencoded({
 
 console.log("Attempting DB Connection");
 
-mongoose.connect("mongodb+srv://"+process.env.DB_USER+":"+process.env.DB_PASS+process.env.DB_LOCATION, {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
-
-  if (err){
-    throw err;
-  } else {
-    console.log("DB Connected Sucessfully");
-    console.log("Backend Server Ready to Recieve Commands");
-  }
-
-});
+mongoose.connect("mongodb+srv://"+process.env.DB_USER+":"+process.env.DB_PASS+process.env.DB_USER_LOCATION, {useNewUrlParser: true, useUnifiedTopology: true})
+  .then(() => console.log("DB Connected Sucessfully"))
+  .catch(err => console.error("Could not connect to database", err));
 
 //create schema for db
 const userSchema = {
@@ -34,7 +27,15 @@ const userSchema = {
   emailAddress: String,
   homeAddress: String,
   creditCard: Object,
-  creditCards: Array
+  creditCards: Array,
+  cart: [{
+    book: Object,
+    quantity: Number
+  }],
+  saveForLater: [{
+    book: Object,
+    quantity: Number
+  }]
 };
 
 //bind schema to object
@@ -126,7 +127,10 @@ router.post('/register', function(req, res){
             userName: userName,
             emailAddress: email,
             name: fullName,
-            password: password
+            password: password,
+            nickname: null,
+            homeAddress: null,
+            creditCard: null,
           });
         
           newUser.save( function (err){
