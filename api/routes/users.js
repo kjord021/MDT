@@ -86,15 +86,15 @@ router.post('/login', function(req, res){
        //if finds matching password
        if (user.password == password){
            //redirect to the dashboard
-           res.send('login success');
+           res.status(200).send('User found');
        } else {
          //handle login fail
-         res.send('login fail')
+         res.status(404).send('User Not Found');
        }
  
      } else {
        //handle login fail
-       res.send('login fail')
+       res.status(404).send('User Not Found');
      }
    })
 });
