@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 const app = require('../app');
 var connect = require('connect');
+const { useParams } = require('react-router-dom');
 var eApp = connect();
 var router = express.Router();
 
@@ -59,13 +60,17 @@ router.get('/', function(req, res, next) {
 /* GET A single user listing. */
 router.get('/user', function(req, res, next) {
 
-  var userName = req.body.userName;
+  console.log(req.query.userName);
+
+  var userName = req.query.userName;
   
   User.findOne({userName: userName}, function(err, result){
     if (err) {
       console.log(err);
     }
     else {
+      console.log(userName);
+      console.log(result);
       res.json(result);
     }
 

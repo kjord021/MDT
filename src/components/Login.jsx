@@ -10,6 +10,20 @@ function Login(props){
     const [failedLogin, setFailedLogin] = useState(false);
     
     function onFormSubmit(e){
+
+        const config = {
+            headers: {
+             'Content-Type': 'application/x-www-form-urlencoded'   
+            }
+        }
+
+        const params = {
+            userName: userName,
+            params: {
+                userName: userName
+            }
+        }
+
         e.preventDefault();
         axios.post('http://localhost:5000/users/login', {
             userName: userName,
@@ -21,12 +35,24 @@ function Login(props){
             props.setLoggedIn(true);
             setFailedLogin(false);
 
+            axios.get('http://localhost:5000/users/user/', params, config)
+            .then((response) => {
+                var data = response.data;
+                props.getUserInformation(JSON.stringify(data));
+            }
+            , (error) => {
+                console.log(error);
+            }
+            );
+
         }, (error) => {
             console.log(error);
             setRedirect(false);
             props.setLoggedIn(false);
             setFailedLogin(true);
         });
+
+        
     }
 
     

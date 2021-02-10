@@ -26,6 +26,13 @@ a:visited{
   padding-right: 50%;
 }
 
+#myAccount {
+  padding-top: 10%;
+}
+
+#accountList {
+
+}
 
 .card-body {
   text-align: left;
