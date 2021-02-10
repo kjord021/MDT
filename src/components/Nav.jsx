@@ -17,7 +17,7 @@ function Nav(props){
                             <a class="nav-link" id="nav"><Link to="/">Home</Link></a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link"><Link to="/">My account</Link></a>
+                            <a class="nav-link"><Link to="/MyAccount">My account</Link></a>
                         </li>
                     </ul>
             </nav>
