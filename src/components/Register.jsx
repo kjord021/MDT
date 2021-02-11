@@ -14,6 +14,8 @@ function Register(){
 
     function onFormSubmit(e){
 
+        setFailedLogin(false);
+
         e.preventDefault();
 
         if (!(password.length >=  6)){
@@ -24,11 +26,8 @@ function Register(){
             setErrorText("The passwords do not match.");
             setFailedLogin(true);
         }
-        else {
-            setFailedLogin(false);
-        }
 
-        if (!failedLogin){
+        if (failedLogin){
             axios.post('http://localhost:5000/users/register', {
             userName: userName,
             password: password,
