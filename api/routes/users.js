@@ -115,13 +115,13 @@ router.post('/register', function(req, res){
   //check to see if UN or email exist
   User.findOne({userName: userName}, function(err, user){
     if (user){
-      res.send('A user with that Username already exists.');
+      res.status(404).send('A user with that Username already exists.');
     }
     else {
       console.log(err);
       User.findOne({emailAddress: email}, function(err, user){
         if (user){
-          res.send('A user with that email address already exists.');
+          res.status(404).send('A user with that email address already exists.');
         }
         else {
           console.log(err);
