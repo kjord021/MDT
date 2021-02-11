@@ -56,6 +56,17 @@ function App() {
     return loginState;
   }
 
+  function logUserOut(){
+    setLoginState(false);
+    setUserName("");
+    setPassword("");
+    setName("");
+    setNick("");
+    setEmailAddress("");
+    setHomeAddress("");
+    setCreditCards([]);
+  }
+
   function getUserInformation(information){
     var tempObject = JSON.parse(information);
     setUserName(tempObject.userName);
@@ -88,6 +99,7 @@ function App() {
             nickName = {nickName}
             emailAddress = {emailAddress}
             isLoggedIn = {isLoggedIn}
+            logUserOut = {logUserOut}
             />
           </Route>
           <Route path ="/ShippingInformation">
@@ -95,12 +107,14 @@ function App() {
             name = {fullName}
             homeAddress = {homeAddress}
             isLoggedIn = {isLoggedIn}
+            logUserOut = {logUserOut}
             />
           </Route>
           <Route path ="/PaymentInformation">
             <MyAccountPayment 
             name = {fullName}
             isLoggedIn = {isLoggedIn}
+            logUserOut = {logUserOut}
             />
           </Route>
           <Route path ="/Dashboard">
