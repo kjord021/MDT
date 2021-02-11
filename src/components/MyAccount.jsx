@@ -10,6 +10,10 @@ import {Redirect} from "react-router-dom";
 
 function MyAccount(props){
 
+    function logOut(){
+        props.logUserOut();
+    }
+
     if (!props.isLoggedIn()) {
        return (<Redirect to='/Login' />);
     }
@@ -45,6 +49,15 @@ function MyAccount(props){
                             <a class="btn btn-primary btn-lg" href="#" role="button">Edit Information</a>
                         </p>
                     </div>
+                </div>
+                <div class="col-lg-3">
+                </div>                      
+            </div>
+            <div class="row" id="myAccount"> 
+                <div class="col-lg-3">
+                </div>
+                <div class="col-lg-6" id="middle">
+                    <a class="btn btn-primary btn-lg" onClick={logOut} href="#" role="button">Logout</a>
                 </div>
                 <div class="col-lg-3">
                 </div>                      
