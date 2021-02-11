@@ -27,7 +27,7 @@ function Register(){
             setFailedLogin(true);
         }
 
-        if (failedLogin){
+        if (!failedLogin){
             axios.post('http://localhost:5000/users/register', {
             userName: userName,
             password: password,
