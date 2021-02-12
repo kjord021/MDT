@@ -2,25 +2,24 @@
   text-align: center;
 }
 
-a:link{
-  color:aliceblue;
+a:link {
+  color: aliceblue;
 }
 
-a:visited{
+a:visited {
   color: aliceblue;
 }
 
 .card {
   width: 18rem;
   background-color: #282c34;
-  
 }
 
 .Welcome-text {
   color: aliceblue;
 }
 
-.card-center{
+.card-center {
   padding-top: 10%;
   padding-left: 32%;
   padding-right: 50%;
@@ -31,7 +30,6 @@ a:visited{
 }
 
 #accountList {
-
 }
 
 .card-body {
@@ -60,4 +58,17 @@ a:visited{
   to {
     transform: rotate(360deg);
   }
+}
+
+#detailscontainer {
+  background-color: #f8f8f8;
+  margin-top: 3vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  text-align: left;
+}
+
+#bookcover {
+  object-fit: cover;
+  width: 100%;
 }
