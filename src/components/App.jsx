@@ -1,22 +1,17 @@
-import '../styling/App.css';
-import React, {useState, useEffect} from 'react';
-import Home from './Home';
-import Login from './Login';
-import Register from './Register';
-import MyAccount from './MyAccount';
-import MyAccountPayment from './MyAccountPayment';
-import MyAccountShipping from './MyAccountShipping';
-import Nav from './Nav';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import axios from 'axios';
+import "../styling/App.css";
+import React, { useState, useEffect } from "react";
+import Home from "./Home";
+import Login from "./Login";
+import Register from "./Register";
+import MyAccount from "./MyAccount";
+import MyAccountPayment from "./MyAccountPayment";
+import MyAccountShipping from "./MyAccountShipping";
+import Nav from "./Nav";
+import BookDetails from "./BookDetails";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import axios from "axios";
 
 function App() {
-
   //Here we are creating a state apiResponse, and a method setAPI to change the value of that state
   // const [apiResponse, setAPI] = useState({
   //   list: []
@@ -29,7 +24,6 @@ function App() {
   const [emailAddress, setEmailAddress] = useState("");
   const [homeAddress, setHomeAddress] = useState("");
   const [creditCards, setCreditCards] = useState([]);
-
 
   // //Call the useEffect hook
   // useEffect(() =>{
@@ -48,15 +42,15 @@ function App() {
   //   })
   // });
 
-  function setLoggedIn(status){
+  function setLoggedIn(status) {
     setLoginState(status);
   }
 
-  function isLoggedIn(){
+  function isLoggedIn() {
     return loginState;
   }
 
-  function logUserOut(){
+  function logUserOut() {
     setLoginState(false);
     setUserName("");
     setPassword("");
@@ -67,7 +61,7 @@ function App() {
     setCreditCards([]);
   }
 
-  function getUserInformation(information){
+  function getUserInformation(information) {
     var tempObject = JSON.parse(information);
     setUserName(tempObject.userName);
     setPassword(tempObject.password);
@@ -75,52 +69,55 @@ function App() {
     setNick(tempObject.nickname);
     setHomeAddress(tempObject.homeAddress);
     setEmailAddress(tempObject.emailAddress);
-    
   }
 
   return (
     <Router>
       <div className="App">
-        <Nav isLoggedIn={isLoggedIn} /> 
+        <Nav isLoggedIn={isLoggedIn} />
         <Switch>
-          <Route path ="/Login">
-            <Login 
-            setLoggedIn={setLoggedIn}
-            getUserInformation={getUserInformation} />
+          <Route path="/Login">
+            <Login
+              setLoggedIn={setLoggedIn}
+              getUserInformation={getUserInformation}
+            />
           </Route>
-          <Route path ="/Register">
+          <Route path="/Register">
             <Register />
           </Route>
-          <Route path ="/MyAccount">
-            <MyAccount 
-            userName={userName}
-            password={password}
-            name = {fullName}
-            nickName = {nickName}
-            emailAddress = {emailAddress}
-            isLoggedIn = {isLoggedIn}
-            logUserOut = {logUserOut}
+          <Route path="/MyAccount">
+            <MyAccount
+              userName={userName}
+              password={password}
+              name={fullName}
+              nickName={nickName}
+              emailAddress={emailAddress}
+              isLoggedIn={isLoggedIn}
+              logUserOut={logUserOut}
             />
           </Route>
-          <Route path ="/ShippingInformation">
+          <Route path="/ShippingInformation">
             <MyAccountShipping
-            name = {fullName}
-            homeAddress = {homeAddress}
-            isLoggedIn = {isLoggedIn}
-            logUserOut = {logUserOut}
+              name={fullName}
+              homeAddress={homeAddress}
+              isLoggedIn={isLoggedIn}
+              logUserOut={logUserOut}
             />
           </Route>
-          <Route path ="/PaymentInformation">
-            <MyAccountPayment 
-            name = {fullName}
-            isLoggedIn = {isLoggedIn}
-            logUserOut = {logUserOut}
+          <Route path="/PaymentInformation">
+            <MyAccountPayment
+              name={fullName}
+              isLoggedIn={isLoggedIn}
+              logUserOut={logUserOut}
             />
           </Route>
-          <Route path ="/Dashboard">
+          <Route path="/BookDetails">
+            <BookDetails />
+          </Route>
+          <Route path="/Dashboard">
             <Home />
           </Route>
-          <Route path ="/">
+          <Route path="/">
             <Home />
           </Route>
         </Switch>
@@ -128,8 +125,5 @@ function App() {
     </Router>
   );
 }
-
-
-
 
 export default App;

@@ -2,25 +2,35 @@
   text-align: center;
 }
 
-a:link{
-  color:aliceblue;
-}
-
-a:visited{
+a:link {
   color: aliceblue;
 }
 
+a:visited {
+  color: aliceblue;
+}
+
+#cardLogin{
+  width: 18rem;
+  background-color: #282c34;
+}
+
+#cardRegister{
+  width: 18rem;
+  background-color: #282c34;
+}
+
+/*
 .card {
   width: 18rem;
   background-color: #282c34;
-  
 }
-
+*/
 .Welcome-text {
   color: aliceblue;
 }
 
-.card-center{
+.card-center {
   padding-top: 10%;
   padding-left: 32%;
   padding-right: 50%;
@@ -31,7 +41,6 @@ a:visited{
 }
 
 #accountList {
-
 }
 
 .card-body {
@@ -60,4 +69,29 @@ a:visited{
   to {
     transform: rotate(360deg);
   }
+}
+
+#detailscontainer {
+  margin-top: 5vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  color: rgb(59, 59, 59);
+}
+
+#bookdetails {
+  margin-top: 0.3vh;
+  margin-bottom: 0.3vh;
+}
+
+#bookauthor {
+  font-style: italic;
+}
+
+#submitbutton {
+  margin-top: 2.1vh;
+}
+
+#detailbutton {
+  margin-top: 2.1vh;
+  margin-left: 5%;
 }
