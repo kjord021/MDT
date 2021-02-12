@@ -21,7 +21,7 @@ const book = {
 function BookDetails() {
   return (
     <div class="container" id="detailscontainer">
-      <BookInfo book={book} />;
+      <BookInfo book={book} />
     </div>
   );
 }
