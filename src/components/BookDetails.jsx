@@ -34,20 +34,12 @@ function BookDetails() {
           <h4>By {book.author}</h4>
           <p style={{ paddingTop: "1vh" }}>{book.desc}</p>
           <p>
-            <span
-              style={{
-                marginRight: "1rem",
-                fontWeight: "500",
-              }}
-              id="otherbookdetails"
-            >
-              PUBLISHER
-            </span>
+            <span style={{paddingRight: "40px"}}>PUBLISHER</span>
             {book.publisher}
           </p>
 
           <p>
-            <span id="otherbookdetails">PUBLISHED ON</span>
+            <span id="otherbookdetails" style={{paddingRight: "10px"}}>PUBLISHED ON</span>
             {book.date}
           </p>
         </div>
