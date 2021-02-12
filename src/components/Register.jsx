@@ -63,7 +63,7 @@ function Register() {
             <div class="row">
               <div class="col-lg-3"></div>
               <div class="col-lg-3" id="middle">
-                <div class="card bg-secondary text-white">
+                <div class="card bg-secondary text-white" id="cardRegister">
                   <div class="card-header">
                     <p>
                       <h1 class="Welcome-text">Welcome!</h1>

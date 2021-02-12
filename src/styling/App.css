@@ -10,6 +10,16 @@ a:visited {
   color: aliceblue;
 }
 
+#cardLogin{
+  width: 18rem;
+  background-color: #282c34;
+}
+
+#cardRegister{
+  width: 18rem;
+  background-color: #282c34;
+}
+
 /*
 .card {
   width: 18rem;

@@ -73,7 +73,7 @@ function Login(props){
                             </div>
                             <div class="col-lg-3" id="middle">
                                 
-                                <div class="card bg-secondary text-white">
+                                <div class="card bg-secondary text-white" id="loginCard">
                                     <div class="card-header">
                                         <p>
                                         <h1 class="Welcome-text">Welcome Back!</h1>
