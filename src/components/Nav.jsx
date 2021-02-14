@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../styling/assets/shopping-cart.svg'
 import {
     BrowserRouter as Router,
     Switch,
@@ -20,6 +21,9 @@ function Nav(props){
                             <a class="nav-link"><Link to="/MyAccount">My account</Link></a>
                         </li>
                     </ul>
+                    <div>
+                        <Link to="/Cart"><img src={logo} class="cart-img"/></Link>
+                    </div>
             </nav>
         );
     }
