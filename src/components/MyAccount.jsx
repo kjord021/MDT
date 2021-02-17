@@ -20,11 +20,11 @@ function MyAccount(props){
 
     return(
         <div class="container">
-            <div class="row" id="myAccount"> 
+             <div class="row" id="myAccount"> 
                 <div class="col-lg-3" id="accountList">
-                    <ul class="list-group">
-                        <li class="list-group-item active">
-                            <a href=""><Link to="/MyAccount">Personal Information</Link></a>
+                    <ul class="list-group" id="accountListGroup">
+                        <li class="list-group-item active" id="activeLGI">
+                            <a href="" id="accountListGroupItem" ><Link to="/MyAccount">Personal Information</Link></a>
                         </li>
                         <li class="list-group-item">
                             <a href=""><Link to="/ShippingInformation">Shipping Information</Link></a>
