@@ -21,11 +21,11 @@ function MyAccountShipping(props){
         <div class="container">
             <div class="row" id="myAccount"> 
                 <div class="col-lg-3" id="accountList">
-                    <ul class="list-group">
+                    <ul class="list-group" id="accountListGroup">
                         <li class="list-group-item">
-                            <a href=""><Link to="/MyAccount">Personal Information</Link></a>
+                            <a href="" id="accountListGroupItem" ><Link to="/MyAccount">Personal Information</Link></a>
                         </li>
-                        <li class="list-group-item active">
+                        <li class="list-group-item active" id="activeLGI">
                             <a href=""><Link to="/ShippingInformation">Shipping Information</Link></a>
                         </li>
                         <li class="list-group-item">

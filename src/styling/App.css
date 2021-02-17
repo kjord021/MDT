@@ -41,6 +41,19 @@ a:visited {
 }
 
 #accountList {
+  color: black;
+}
+
+#accountListGroup a:link {
+  color: black;
+}
+
+#accountListGroup a:visited {
+  color: black;
+}
+
+#accountListGroupItem {
+  color: black;
 }
 
 .card-body {
