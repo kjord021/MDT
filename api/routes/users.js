@@ -15,9 +15,13 @@ eApp.use(bodyParser.urlencoded({
 
 console.log("Attempting DB Connection");
 
-mongoose.connect("mongodb+srv://"+process.env.DB_USER+":"+process.env.DB_PASS+process.env.DB_USER_LOCATION, {useNewUrlParser: true, useUnifiedTopology: true})
-  .then(() => console.log("DB Connected Sucessfully"))
-  .catch(err => console.error("Could not connect to database", err));
+const userConn = mongoose.createConnection("mongodb+srv://"+process.env.DB_USER+":"+process.env.DB_PASS+process.env.DB_USER_LOCATION, {useNewUrlParser: true, useUnifiedTopology: true})
+userConn.on('error', err => {
+    console.error("Could not connect to database", err)
+ });
+userConn.on('connected', () => {
+    console.log('User DB Connected Sucessfully');
+});
 
 //create schema for db
 const userSchema = {
@@ -40,7 +44,7 @@ const userSchema = {
 };
 
 //bind schema to object
-const User = mongoose.model("User", userSchema);
+const User = userConn.model("User", userSchema);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {

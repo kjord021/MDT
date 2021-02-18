@@ -6,6 +6,7 @@ import Register from "./Register";
 import MyAccount from "./MyAccount";
 import MyAccountPayment from "./MyAccountPayment";
 import MyAccountShipping from "./MyAccountShipping";
+import Cart from "./Cart";
 import Nav from "./Nav";
 import BookDetails from "./BookDetails";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -24,6 +25,7 @@ function App() {
   const [emailAddress, setEmailAddress] = useState("");
   const [homeAddress, setHomeAddress] = useState("");
   const [creditCards, setCreditCards] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState([]);
 
   // //Call the useEffect hook
   // useEffect(() =>{
@@ -69,6 +71,7 @@ function App() {
     setNick(tempObject.nickname);
     setHomeAddress(tempObject.homeAddress);
     setEmailAddress(tempObject.emailAddress);
+    setShoppingCart(tempObject.cart);
   }
 
   return (
@@ -113,6 +116,17 @@ function App() {
           </Route>
           <Route path="/BookDetails">
             <BookDetails />
+          </Route>
+          <Route path="/Cart">
+            <Cart
+              userName={userName}
+              password={password}
+              name={fullName}
+              nickName={nickName}
+              emailAddress={emailAddress}
+              cart={shoppingCart}
+              isLoggedIn={isLoggedIn}
+            />
           </Route>
           <Route path="/Dashboard">
             <Home />
