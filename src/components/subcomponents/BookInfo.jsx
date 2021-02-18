@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function BookInfo(props) {
+  const [enlarge, setEnlarge] = useState(false);
   return (
     <div class="row">
       <div class="col-lg-1"></div>
@@ -8,7 +9,12 @@ function BookInfo(props) {
         <div class="card mb-3">
           <div class="row no-gutters">
             <div class="col-lg-4">
-              <img src={props.book.cover} class="card-img" alt="book cover" />
+              <img
+                src={props.book.cover}
+                class="card-img"
+                alt="book cover"
+                onClick={() => setEnlarge(true)}
+              />
             </div>
             <div class="col-lg-8">
               <div class="card-body">
@@ -43,7 +49,7 @@ function BookInfo(props) {
                   {props.book.price}
                 </p>
                 <button id="submitbutton" type="submit" class="btn btn-success">
-                  Purchase
+                  Add to cart
                 </button>
                 <button id="detailbutton" type="submit" class="btn btn-info">
                   About Author
@@ -57,8 +63,26 @@ function BookInfo(props) {
         </div>
       </div>
       <div class="col-lg-1"></div>
+      {enlarge && <LargeCover img={props.book.cover} setEnlarge={setEnlarge} />}
     </div>
   );
 }
+
+const LargeCover = ({ img, setEnlarge }) => {
+  return (
+    <div class="enlarge-img-overlay row">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-10">
+        <img
+          onClick={() => setEnlarge(false)}
+          src={img}
+          class="enlarge-img"
+          alt="book cover"
+        />
+      </div>
+      <div class="col-lg-1"></div>
+    </div>
+  );
+};
 
 export default BookInfo;

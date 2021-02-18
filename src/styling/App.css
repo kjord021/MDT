@@ -10,12 +10,12 @@ a:visited {
   color: aliceblue;
 }
 
-#cardLogin{
+#cardLogin {
   width: 18rem;
   background-color: #282c34;
 }
 
-#cardRegister{
+#cardRegister {
   width: 18rem;
   background-color: #282c34;
 }
@@ -89,7 +89,7 @@ a:visited {
   padding-top: 1vh;
   padding-bottom: 1vh;
   color: rgb(59, 59, 59);
-} 
+}
 #detailscontainer {
   margin-top: 5vh;
   padding-top: 1vh;
@@ -148,7 +148,11 @@ a:visited {
   border: 15px;
   border-color: red;
   text-align: left;
-  background: linear-gradient(0deg, rgb(109, 109, 109) 0%, rgb(255,255,255) 100%);
+  background: linear-gradient(
+    0deg,
+    rgb(109, 109, 109) 0%,
+    rgb(255, 255, 255) 100%
+  );
 }
 
 .card-title.cart-title {
@@ -172,4 +176,25 @@ a:visited {
   margin-right: 40%;
   border: 1px solid black;
   border-radius: 10px;
+}
+
+.card-img {
+  cursor: pointer;
+}
+
+.enlarge-img {
+  cursor: pointer;
+  margin-top: 15vh;
+  width: auto;
+  height: 70%;
+}
+
+.enlarge-img-overlay {
+  position: absolute;
+  z-index: 1000;
+  background: hsla(0, 0%, 0%, 0.726);
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
