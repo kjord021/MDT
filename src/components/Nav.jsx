@@ -41,6 +41,9 @@ function Nav(props){
                         <a class="nav-link"><Link to="/Register">Register</Link></a>
                     </li>
                 </ul>
+                <div>
+                        <Link to="/Cart"><img src={logo} class="cart-img"/></Link>
+                </div>
             </nav>
       );
     }

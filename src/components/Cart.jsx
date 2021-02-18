@@ -19,18 +19,24 @@ const book = {
   };
 
 function Cart(props) {
+  var totalCost = 0;
     if (!props.isLoggedIn()) {
         return (<Redirect to='/Login' />);
     }
     return (
-    <div class="container" id="cartcontainer">
-        <h1>Shopping Cart</h1>
-        <hr />
-            {props.cart.map((item,i) => {
-              return <p key={i}>{<CartInfo book={book} quantity={item.quantity}/>}</p>
-            })};
-    </div>
+      <div>
+        <div class="container">
+          <h1>Shopping Cart</h1>
+          <hr />
+          {props.cart.map((item, i) => {
+            totalCost = (parseFloat(book.price) * parseFloat(item.quantity)) + totalCost 
+            return <p key={i}>{<CartInfo book={book} quantity={item.quantity} />}</p>
+          })};
+        </div>
+        <h4 id="total">Total Cost: ${totalCost}</h4>
+      </div>
     );
-}
+  }
+
 
 export default Cart;
