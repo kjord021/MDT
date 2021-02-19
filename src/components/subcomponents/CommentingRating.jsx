@@ -5,28 +5,6 @@ function CommentingRating(props) {
   const [headline, setHeadline] = useState("");
   const [comment, setComment] = useState("");
 
-  const reviewConn = mongoose.createConnection(
-    "mongodb+srv://" +
-      process.env.DB_USER +
-      ":" +
-      process.env.DB_PASS +
-      process.env.DB_BOOK_LOCATION,
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  );
-  reviewConn.on("error", (err) => {
-    console.error("Could not connect to Review database", err);
-  });
-  reviewConn.on("connected", () => {
-    console.log("Review DB Connected Sucessfully");
-  });
-
-  const reviewSchema = {
-    headline: { type: String, trim: true, default: "default headline" },
-    comment: { type: String, trim: true, default: "default comment" },
-  };
-
-  const review = reviewConn.model("Review", reviewSchema, "commentratingDB");
-
   return (
     <div class="row" align="center">
       <div class="col-lg-1"></div>
