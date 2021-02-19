@@ -1,5 +1,6 @@
 import React from "react";
 import BookInfo from "./subcomponents/BookInfo";
+import CommentingRating from "./subcomponents/CommentingRating";
 
 // Placeholder book object (this will be replaced by a fetch later on)
 
@@ -22,6 +23,7 @@ function BookDetails() {
   return (
     <div class="container" id="detailscontainer">
       <BookInfo book={book} />
+      <CommentingRating />
     </div>
   );
 }
