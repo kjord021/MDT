@@ -31,10 +31,10 @@ app.use("/testAPI", testAPIRouter);
 
 app.use("/books", bookRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+//catch 404 and forward to error handler
+//app.use(function(req, res, next) {
+  //next(createError(404, 'There is an error'));
+//});
 
 // error handler
 app.use(function(err, req, res, next) {

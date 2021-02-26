@@ -6,9 +6,11 @@ var connect = require('connect');
 const { useParams } = require('react-router-dom');
 var eApp = connect();
 var router = express.Router();
+var Int32 = require('mongoose-int32');
 
 require('dotenv').config();
 
+eApp.use(bodyParser.json());
 eApp.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -25,17 +27,18 @@ bookConn.on('connected', () => {
 
 //create schema for db
 const bookSchema = {
-  _id: Number,
   author: String,
   cover: String,
   genre: String,
-  price: String,
-  rating: String,
+  price: mongoose.Decimal128,
+  rating: Int32,
   title: String,
+  __v: Int32,
+  authorBio: String,
   date: Date,
   description: String,
   publisher: String,
-  authorBio: String
+
 };
 
 //bind schema to object
@@ -44,13 +47,9 @@ const Book = bookConn.model("Book", bookSchema);
 /* GET books listing. */
 router.get('/', function(req, res, next) {
 
-Book.find({}, function(err, result){
-  if (err) {
-    console.log(err);
-  }
-  else {
-    res.json(result);
-  }
+Book.find({}, function(err, books){
+ console.log("working");
+  res.send(books);
 
 });
 });
@@ -76,13 +75,34 @@ router.get('/book', function(req, res, next) {
 
 });
   /*POST individual books*/
-  router.post('/addBook',(req, res) => {
-        let book = new Book({title: 'The Bible', author: 'Jesus'});
-        book.save();
-        res.status(201).send(book)
+  router.post('/addBook',(req, res, next) => {
+        let book = new Book(req.body);
+        book.save(function (err, post) {
+    if (err) { return next(err) }
+    res.json(201, post)
     });
-    // Everything below
-    // is under construction :)
+  });
+
+//  var {ObjectID} = require('mongodb');
+  /*DELETE books*/
+  router.delete('/deleteBook',(req,res)=>{
+
+    console.log('Hey buddy');
+    var bookTitle = req.body.title;
+
+    console.log(bookTitle);
+
+    Book.deleteOne({title: bookTitle}).then(function(){
+      console.log("Deleting Book");
+    }).catch(function(error){
+        console.log(error);
+    });
+    res.send('Book deleted');
+  });
+
+
+
+//PUT and PATCH: under construction
     /*PUT Individual books for editing*/
     router.put((req,res) => {
             Book.findById(req.params._id, (err, book) => {
@@ -105,18 +125,18 @@ router.get('/book', function(req, res, next) {
                     res.json(book);
                 })
   });
-  /*DELETE books*/
-  router.delete((req,res)=>{
-        Book.findById(req.params._id, (err, book) => {
-            book.remove(err => {
+
+
+
+
+/*        Book.findByIdAndRemove(req.params._id, (err, book) => {
+
                 if(err){
                     res.status(500).send(err)
                 }
                 else{
                     res.status(204).send('removed')
                 }
-            })
-        })
-    });
+*/
 
 module.exports = router;
