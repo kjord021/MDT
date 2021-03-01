@@ -160,17 +160,27 @@ router.post('/register', function(req, res){
 
 /* PUT A single user to update. */
 router.put('/update', function(req, res){
-  
+
   const userName = req.body.userName;
   const email = req.body.emailAdd;
   const password = req.body.password;
+  const fullName = req.body.fullName;
+  const nickname = req.body.nickname;
 
   if (email != null) {
-    User.updateOne({userName: userName}, {emailAddress: email}, function(err){
-      if (err){
-        console.log(err);
-      } else {
-        console.log('Updated Users Email Address');
+
+    User.findOne({emailAddress: email}, function(err, user){
+      if (user){
+        res.status(404).send('A user with that email already exists');
+      }
+      else {
+        User.updateOne({userName: userName}, {emailAddress: email}, function(err){
+          if (err){
+            console.log(err);
+          } else {
+            res.send('Updated Users Email Address');
+          }
+        });
       }
     });
   }
@@ -179,13 +189,28 @@ router.put('/update', function(req, res){
       if (err){
         console.log(err);
       } else {
-        console.log('Updated Users Password');
+        res.send('Updated Users Password');
       }
     });
   }
-  
-  res.send('Finished updating information');
-
+  if (fullName != null) {
+    User.updateOne({userName: userName}, {name: fullName}, function(err){
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Updated Users Name');
+      }
+    });
+  }
+  if (nickname != null) {
+    User.updateOne({userName: userName}, {nickname: nickname}, function(err){
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Updated Users NickName');
+      }
+    });
+  }
 });
 
 /* DELETE A single user to delete. */

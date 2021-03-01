@@ -7,6 +7,7 @@ import {
     Link
   } from "react-router-dom";
 import {Redirect} from "react-router-dom";
+import EditPersonalInfo from "./EditName"
 
 function MyAccount(props){
 
@@ -35,19 +36,71 @@ function MyAccount(props){
                     </ul>
                 </div>
                 <div class="col-lg-6" id="middle">
+                    
                     <div class="jumbotron">
                         <h1 class="display-4">Personal Information</h1>
                         <p class="lead">
                             Hello, {props.name}! You can edit your personal information below.
                         </p>
                         <hr class="my-4" />
-                        <label>Name: {props.name} </label><br/>
-                        <label>Nickname: {props.nickName} </label><br/>
-                        <label>Email Address: {props.emailAddress} </label><br/>
-                        <label>Password: {props.password} </label><br/>
-                        <p class="lead">
-                            <a class="btn btn-primary btn-lg" href="#" role="button">Edit Information</a>
-                        </p>
+                        <ul class="list-group" id="accountListGroup">
+                            <li class="list-group-item" id="">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <label>Name: {props.name} </label> &nbsp;
+                                    </div>
+                                    <div class="col-sm-0">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <a class="btn btn-primary btn-sm" href="#" role="button">
+                                            <Link to="/EditName">&#9998;</Link>
+                                        </a><br/><br/>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <label>Nickname: {props.nickName} </label> &nbsp;
+                                    </div>
+                                    <div class="col-sm-0">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <a class="btn btn-primary btn-sm" href="#" role="button">
+                                            <Link to="/EditNick">&#9998;</Link>
+                                        </a><br/><br/>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <label>Email Address: {props.emailAddress} </label> &nbsp;
+                                    </div>
+                                    <div class="col-sm-0">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <a class="btn btn-primary btn-sm" href="#" role="button">
+                                            <Link to="/EditEmail">&#9998;</Link>
+                                        </a><br/><br/>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <label>Change Your Password (for the safety of your account we do not display this information)</label> &nbsp;
+                                    </div>
+                                    <div class="col-sm-0">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <a class="btn btn-primary btn-sm" href="#" role="button">
+                                            <Link to="/EditPassword">&#9998;</Link>
+                                        </a><br/><br/>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-lg-3">
