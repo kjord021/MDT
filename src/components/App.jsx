@@ -4,6 +4,10 @@ import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
 import MyAccount from "./MyAccount";
+import EditName from "./EditName";
+import EditNick from "./EditNick";
+import EditEmail from "./EditEmail";
+import EditPassword from "./EditPassword"
 import MyAccountPayment from "./MyAccountPayment";
 import MyAccountShipping from "./MyAccountShipping";
 import Cart from "./Cart";
@@ -95,6 +99,36 @@ function App() {
               name={fullName}
               nickName={nickName}
               emailAddress={emailAddress}
+              isLoggedIn={isLoggedIn}
+              logUserOut={logUserOut}
+            />
+          </Route>
+          <Route path="/EditName">
+            <EditName 
+              userName= {userName}
+              isLoggedIn={isLoggedIn}
+              logUserOut={logUserOut}
+            />
+          </Route>
+          <Route path="/EditNick">
+            <EditNick 
+              userName= {userName}
+              isLoggedIn={isLoggedIn}
+              logUserOut={logUserOut}
+            />
+          </Route>
+          <Route path="/EditEmail">
+            <EditEmail
+              emailAddress = {emailAddress}
+              userName= {userName}
+              isLoggedIn={isLoggedIn}
+              logUserOut={logUserOut}
+            />
+          </Route>
+          <Route path="/EditPassword">
+            <EditPassword
+              password = {password}
+              userName= {userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
