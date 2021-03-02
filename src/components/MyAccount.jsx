@@ -58,6 +58,34 @@ function MyAccount(props){
                                     </div>
                                 </div>
                             </li>
+                            <li class="list-group-item" id="">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <label>Username: {props.userName} </label> &nbsp;
+                                    </div>
+                                    <div class="col-sm-0">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <a class="btn btn-primary btn-sm" href="#" role="button">
+                                            <Link to="/EditUsername">&#9998;</Link>
+                                        </a><br/><br/>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item" id="">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <label>Home Address: {props.homeAddress} </label> &nbsp;
+                                    </div>
+                                    <div class="col-sm-0">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <a class="btn btn-primary btn-sm" href="#" role="button">
+                                            <Link to="/EditHomeAddress">&#9998;</Link>
+                                        </a><br/><br/>
+                                    </div>
+                                </div>
+                            </li>
                             <li class="list-group-item">
                                 <div class="row">
                                     <div class="col-sm-7">

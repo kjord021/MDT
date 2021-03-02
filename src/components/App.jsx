@@ -5,6 +5,8 @@ import Login from "./Login";
 import Register from "./Register";
 import MyAccount from "./MyAccount";
 import EditName from "./EditName";
+import EditUsername from "./EditUsername";
+import EditHomeAddress from "./EditHomeAddress";
 import EditNick from "./EditNick";
 import EditEmail from "./EditEmail";
 import EditPassword from "./EditPassword"
@@ -96,6 +98,7 @@ function App() {
             <MyAccount
               userName={userName}
               password={password}
+              homeAddress = {homeAddress}
               name={fullName}
               nickName={nickName}
               emailAddress={emailAddress}
@@ -105,6 +108,20 @@ function App() {
           </Route>
           <Route path="/EditName">
             <EditName 
+              userName= {userName}
+              isLoggedIn={isLoggedIn}
+              logUserOut={logUserOut}
+            />
+          </Route>
+          <Route path="/EditUsername">
+            <EditUsername 
+              userName= {userName}
+              isLoggedIn={isLoggedIn}
+              logUserOut={logUserOut}
+            />
+          </Route>
+          <Route path="/EditHomeAddress">
+            <EditHomeAddress 
               userName= {userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
