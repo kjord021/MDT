@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BookInfo from "./subcomponents/BookInfo";
 import CommentingRating from "./subcomponents/CommentingRating";
+import axios from "axios";
 
-// Placeholder book object (this will be replaced by a fetch later on)
+// Placeholder book object
 
+/*
 const book = {
   author: "J.K. Rowling",
   authorBio:
@@ -18,8 +20,22 @@ const book = {
     "The heart of Book 7 is a hero's mission--not just in Harry's quest for the Horcruxes, but in his journey from boy to man--and Harry faces more danger than that found in all six books combined, from the direct threat of the Death Eaters and you-know-who, to the subtle perils of losing faith in himself. ",
   publisher: "Arthur A. Levine Books",
 };
+*/
 
 function BookDetails() {
+  // This title will be passed in as a param when we have the book browsing done
+  const title = "Harry Potter and the Chamber of Secrets";
+  const url = "http://localhost:5000/books/book?title=" + title;
+
+  const [book, setBook] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((response) => setBook(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <div class="container" id="detailscontainer">
       <BookInfo book={book} />

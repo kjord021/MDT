@@ -64,8 +64,6 @@ router.get('/', function(req, res, next) {
 /* GET A single user listing. */
 router.get('/user', function(req, res, next) {
 
-  console.log(req.query.userName);
-
   var userName = req.query.userName;
   
   User.findOne({userName: userName}, function(err, result){
@@ -73,8 +71,6 @@ router.get('/user', function(req, res, next) {
       console.log(err);
     }
     else {
-      console.log(userName);
-      console.log(result);
       res.json(result);
     }
 
@@ -160,17 +156,48 @@ router.post('/register', function(req, res){
 
 /* PUT A single user to update. */
 router.put('/update', function(req, res){
-  
+
   const userName = req.body.userName;
+  const newUserName = req.body.newUserName;
+  const homeAddress = req.body.homeAddress;
   const email = req.body.emailAdd;
   const password = req.body.password;
+  const fullName = req.body.fullName;
+  const nickname = req.body.nickname;
+
+  console.log(req.body.homeAddress);
+
+  if (newUserName != null){
+    User.findOne({userName: newUserName}, function(err, user){
+      if (user){
+        res.status(404).send('A user with that Username already exists.');
+      }
+      else {
+        User.updateOne({userName: userName}, {userName: newUserName}, function(err){
+          if (err){
+            console.log(err);
+          } else {
+            res.send('Updated UserName');
+          }
+        });
+      }
+    });
+  }
 
   if (email != null) {
-    User.updateOne({userName: userName}, {emailAddress: email}, function(err){
-      if (err){
-        console.log(err);
-      } else {
-        console.log('Updated Users Email Address');
+
+    User.findOne({emailAddress: email}, function(err, user){
+      if (user){
+        res.status(404).send('A user with that email already exists');
+      }
+      else {
+        User.updateOne({userName: userName}, {emailAddress: email}, function(err){
+          if (err){
+            console.log(err);
+          } else {
+            res.send('Updated Users Email Address');
+          }
+        });
       }
     });
   }
@@ -179,13 +206,37 @@ router.put('/update', function(req, res){
       if (err){
         console.log(err);
       } else {
-        console.log('Updated Users Password');
+        res.send('Updated Users Password');
       }
     });
   }
-  
-  res.send('Finished updating information');
-
+  if (fullName != null) {
+    User.updateOne({userName: userName}, {name: fullName}, function(err){
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Updated Users Name');
+      }
+    });
+  }
+  if (homeAddress != null){
+    User.updateOne({userName: userName}, {homeAddress: homeAddress}, function(err){
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Updated Users Address');
+      }
+    });
+  }
+  if (nickname != null) {
+    User.updateOne({userName: userName}, {nickname: nickname}, function(err){
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Updated Users NickName');
+      }
+    });
+  }
 });
 
 /* DELETE A single user to delete. */
