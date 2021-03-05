@@ -78,6 +78,11 @@ function App() {
     setShoppingCart(tempObject.cart);
   }
 
+  function updateCart(data) {
+    var userData = JSON.parse(data)
+    setShoppingCart(userData.cart)
+  }
+
   return (
     <Router>
       <div className="App">
@@ -153,6 +158,7 @@ function App() {
           </Route>
           <Route path="/Cart">
             <Cart
+              updateCart={updateCart}
               userName={userName}
               password={password}
               name={fullName}

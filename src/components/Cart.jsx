@@ -1,25 +1,30 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from "react";
 import {Redirect} from "react-router-dom";
 import CartInfo from "./subcomponents/CartInfo";
-
-const book = {
-    _id: 1,
-    author: "J.K. Rowling",
-    authorBio:
-      "Joanne Rowling CH, OBE, HonFRSE, FRCPE, FRSL, better known by her pen name J. K. Rowling, is a British author and philanthropist. She is best known for writing the Harry Potter fantasy series.",
-    cover:
-      "https://images-na.ssl-images-amazon.com/images/I/51jyI6lYi1L._SX342_BO1,204,203,200_.jpg",
-    genre: "Fiction",
-    price: "10.49",
-    title: "Harry Potter and the Deathly Hallows",
-    date: "July 1, 2009",
-    desc:
-      "The heart of Book 7 is a hero's mission--not just in Harry's quest for the Horcruxes, but in his journey from boy to man--and Harry faces more danger than that found in all six books combined, from the direct threat of the Death Eaters and you-know-who, to the subtle perils of losing faith in himself. ",
-    publisher: "Arthur A. Levine Books",
-  };
+import axios from "axios";
 
 function Cart(props) {
   var totalCost = 0;
+  var quantity = 0;
+
+  const [books, setBooks] = useState([]); //stores book data from GET
+
+  useEffect(() => {
+    axios //refreshes shopping cart data
+    .get("http://localhost:5000/users/user/", {params: {userName:props.userName}})
+    .then((response) => {
+      var data = response.data;
+      props.updateCart(JSON.stringify(data))
+    })
+    .catch((error) => console.log(error))
+    .finally(() => {
+      props.cart.forEach((book) => { //loops through cart to retrieve book data based on ID
+        axios
+        .get("http://localhost:5000/books/book/id", {params: {_id:book.book}})
+        .then((response) => setBooks(books => [...books, response.data]))
+        .catch((error) => console.log(error));
+  })})},[]);
+
     if (!props.isLoggedIn()) {
         return (<Redirect to='/Login' />);
     }
@@ -28,15 +33,23 @@ function Cart(props) {
         <div class="container">
           <h1>Shopping Cart</h1>
           <hr />
-          {props.cart.map((item, i) => {
-            totalCost = (parseFloat(book.price) * parseFloat(item.quantity)) + totalCost 
-            return <p key={i}>{<CartInfo book={book} quantity={item.quantity} />}</p>
-          })};
+          {books.map((book, i) => {
+            if (props.cart[i] != undefined) {
+              props.cart.forEach((item) => {
+                if (item.book == book._id) {
+                  quantity = item.quantity
+                }
+              })
+              totalCost = (parseFloat(book.price?.$numberDecimal) * parseFloat(quantity)) + totalCost 
+              return <div key={i}>{<CartInfo book={book} quantity={quantity} />}</div>
+            }
+          })}
         </div>
-        <h4 id="total">Total Cost: ${totalCost}</h4>
+        <h4 id="total">Total Cost: ${totalCost.toFixed(2)}</h4>
       </div>
     );
   }
+
 
 
 export default Cart;
