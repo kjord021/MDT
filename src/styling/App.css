@@ -198,3 +198,14 @@ a:visited {
   top: 0;
   left: 0;
 }
+
+.author-heading {
+  font-style: italic;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+.author-card-img {
+  width: auto;
+  height: 190px;
+}
