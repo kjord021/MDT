@@ -38,7 +38,6 @@ const bookSchema = {
   date: Date,
   description: String,
   publisher: String,
-
 };
 
 //bind schema to object
@@ -54,7 +53,7 @@ Book.find({}, function(err, books){
 });
 });
 
-/*GET individual books*/
+/*GET individual book by title*/
 router.get('/book', function(req, res, next) {
 
   console.log(req.query.title);
@@ -70,10 +69,23 @@ router.get('/book', function(req, res, next) {
       console.log(result);
       res.json(result);
     }
-
   })
-
 });
+
+/*GET individual book by ID*/
+router.get('/book/id', (req, res, next) => {
+  var id = req.query;
+
+  Book.findById(id, (err, result) => {
+    if(err) {
+      console.log(err);
+    }
+    else {
+      res.json(result);
+    }
+  })
+});
+
   /*POST individual books*/
   router.post('/addBook',(req, res, next) => {
         let book = new Book(req.body);

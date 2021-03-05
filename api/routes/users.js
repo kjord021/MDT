@@ -158,6 +158,27 @@ router.post('/register', function(req, res){
   }); 
 });
 
+/*PUT new book to cart*/
+router.put('/cart/add', function(req, res) {
+  const book = req.body.book;
+  var quantity = req.body.quantity;
+  const userID = req.body.userID;
+
+  if (quantity == null) {
+    quantity = 1
+  }
+  User.updateOne(
+    {_id: userID},
+    {$push: {"cart": [{"book": book, "quantity": quantity}]}}, (err) => {
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Book added to cart');
+      }
+    }
+  )
+});
+
 /* PUT A single user to update. */
 router.put('/update', function(req, res){
 
@@ -225,6 +246,41 @@ router.delete('/delete', function(req, res){
   }); 
 
   res.send('Successfully Deleted User');
+});
+
+/*DELETE item from cart*/
+router.delete("/cart/delete", (req, res) => {
+  const cartItemID = req.body.cartId;
+  const userID = req.body.userID;
+
+  User.updateOne(
+    {_id: userID},
+    {$pull: {"cart": {_id:cartItemID}}}, (err) => {
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Book removed from cart');
+      }
+    }
+  )
+});
+
+/*PATCH quantity in cart*/
+router.patch("/cart/update", (req, res) => {
+  const cartItemID = req.body.cartId
+  const userID = req.body.userID;
+  const newQuantity = req.body.quantity
+
+  User.updateOne(
+    {_id: userID, "cart._id": cartItemID},
+    {$set: {"cart.$.quantity": newQuantity}}, (err) => {
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Book quantity updated');
+      }
+    }
+  )
 });
 
 module.exports = router;
