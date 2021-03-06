@@ -9,13 +9,14 @@ import EditUsername from "./EditUsername";
 import EditHomeAddress from "./EditHomeAddress";
 import EditNick from "./EditNick";
 import EditEmail from "./EditEmail";
-import EditPassword from "./EditPassword"
+import EditPassword from "./EditPassword";
 import MyAccountPayment from "./MyAccountPayment";
 import MyAccountShipping from "./MyAccountShipping";
 import Cart from "./Cart";
 import Search from "./Search";
 import Nav from "./Nav";
 import BookDetails from "./BookDetails";
+import AboutAuthor from "./AboutAuthor";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 
@@ -25,6 +26,7 @@ function App() {
   //   list: []
   // });
   const [loginState, setLoginState] = useState(false);
+  const [userID, setUserID] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setName] = useState("");
@@ -72,6 +74,7 @@ function App() {
 
   function getUserInformation(information) {
     var tempObject = JSON.parse(information);
+    setUserID(tempObject._id);
     setUserName(tempObject.userName);
     setPassword(tempObject.password);
     setName(tempObject.name);
@@ -79,6 +82,11 @@ function App() {
     setHomeAddress(tempObject.homeAddress);
     setEmailAddress(tempObject.emailAddress);
     setShoppingCart(tempObject.cart);
+  }
+
+  function updateCart(data) {
+    var userData = JSON.parse(data)
+    setShoppingCart(userData.cart)
   }
 
   return (
@@ -99,7 +107,7 @@ function App() {
             <MyAccount
               userName={userName}
               password={password}
-              homeAddress = {homeAddress}
+              homeAddress={homeAddress}
               name={fullName}
               nickName={nickName}
               emailAddress={emailAddress}
@@ -109,44 +117,44 @@ function App() {
           </Route>
           <Route path="/EditName">
             <EditName
-              userName= {userName}
+              userName={userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
           </Route>
           <Route path="/EditUsername">
             <EditUsername
-              userName= {userName}
+              userName={userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
           </Route>
           <Route path="/EditHomeAddress">
             <EditHomeAddress
-              userName= {userName}
+              userName={userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
           </Route>
           <Route path="/EditNick">
             <EditNick
-              userName= {userName}
+              userName={userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
           </Route>
           <Route path="/EditEmail">
             <EditEmail
-              emailAddress = {emailAddress}
-              userName= {userName}
+              emailAddress={emailAddress}
+              userName={userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
           </Route>
           <Route path="/EditPassword">
             <EditPassword
-              password = {password}
-              userName= {userName}
+              password={password}
+              userName={userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
@@ -169,8 +177,13 @@ function App() {
           <Route path="/BookDetails">
             <BookDetails />
           </Route>
+          <Route path="/Author/">
+            <AboutAuthor />
+          </Route>
           <Route path="/Cart">
             <Cart
+              updateCart={updateCart}
+              userID={userID}
               userName={userName}
               password={password}
               name={fullName}

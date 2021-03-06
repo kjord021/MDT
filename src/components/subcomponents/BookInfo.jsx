@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function BookInfo(props) {
   const [enlarge, setEnlarge] = useState(false);
@@ -51,9 +52,17 @@ function BookInfo(props) {
                 <button id="submitbutton" type="submit" class="btn btn-success">
                   Add to cart
                 </button>
-                <button id="detailbutton" type="submit" class="btn btn-info">
-                  About Author
-                </button>
+                <Link
+                  to={{
+                    pathname: "/Author",
+                    bio: props.book.authorBio,
+                    author: props.book.author,
+                  }}
+                >
+                  <button id="detailbutton" type="submit" class="btn btn-info">
+                    About Author
+                  </button>
+                </Link>
                 <button id="detailbutton" type="submit" class="btn btn-dark">
                   Back to results
                 </button>
