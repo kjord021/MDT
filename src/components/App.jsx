@@ -13,6 +13,7 @@ import EditPassword from "./EditPassword"
 import MyAccountPayment from "./MyAccountPayment";
 import MyAccountShipping from "./MyAccountShipping";
 import Cart from "./Cart";
+import Search from "./Search";
 import Nav from "./Nav";
 import BookDetails from "./BookDetails";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -107,28 +108,28 @@ function App() {
             />
           </Route>
           <Route path="/EditName">
-            <EditName 
+            <EditName
               userName= {userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
           </Route>
           <Route path="/EditUsername">
-            <EditUsername 
+            <EditUsername
               userName= {userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
           </Route>
           <Route path="/EditHomeAddress">
-            <EditHomeAddress 
+            <EditHomeAddress
               userName= {userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
           </Route>
           <Route path="/EditNick">
-            <EditNick 
+            <EditNick
               userName= {userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
@@ -175,6 +176,14 @@ function App() {
               name={fullName}
               nickName={nickName}
               emailAddress={emailAddress}
+              cart={shoppingCart}
+              isLoggedIn={isLoggedIn}
+            />
+          </Route>
+          <Route path="/Search">
+            <Search
+              userName={userName}
+              password={password}
               cart={shoppingCart}
               isLoggedIn={isLoggedIn}
             />

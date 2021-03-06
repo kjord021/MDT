@@ -20,6 +20,9 @@ function Nav(props){
                         <li class="nav-item active">
                             <a class="nav-link"><Link to="/MyAccount">My account</Link></a>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link"><Link to="/Search">Book Search</Link></a>
+                        </li>
                     </ul>
                     <div>
                         <Link to="/Cart"><img src={logo} class="cart-img"/></Link>
@@ -48,7 +51,7 @@ function Nav(props){
       );
     }
 
-   
+
 }
 
 export default Nav;
