@@ -5,7 +5,7 @@ import axios from "axios";
 
 function Cart(props) {
   var totalCost = 0;
-  var quantity = 0;
+  var cartItem = {};
 
   const [books, setBooks] = useState([]); //stores book data from GET
 
@@ -37,11 +37,11 @@ function Cart(props) {
             if (props.cart[i] != undefined) {
               props.cart.forEach((item) => {
                 if (item.book == book._id) {
-                  quantity = item.quantity
+                  cartItem = item
                 }
               })
-              totalCost = (parseFloat(book.price?.$numberDecimal) * parseFloat(quantity)) + totalCost 
-              return <div key={i}>{<CartInfo book={book} quantity={quantity} />}</div>
+              totalCost = (parseFloat(book.price?.$numberDecimal) * parseFloat(cartItem.quantity)) + totalCost 
+              return <div key={i}>{<CartInfo book={book} cartItem={cartItem} userID={props.userID} />}</div>
             }
           })}
         </div>

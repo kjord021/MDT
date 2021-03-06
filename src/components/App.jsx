@@ -22,6 +22,7 @@ function App() {
   //   list: []
   // });
   const [loginState, setLoginState] = useState(false);
+  const [userID, setUserID] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setName] = useState("");
@@ -69,6 +70,7 @@ function App() {
 
   function getUserInformation(information) {
     var tempObject = JSON.parse(information);
+    setUserID(tempObject._id);
     setUserName(tempObject.userName);
     setPassword(tempObject.password);
     setName(tempObject.name);
@@ -159,6 +161,7 @@ function App() {
           <Route path="/Cart">
             <Cart
               updateCart={updateCart}
+              userID={userID}
               userName={userName}
               password={password}
               name={fullName}
