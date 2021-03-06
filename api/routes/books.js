@@ -1,28 +1,37 @@
-var express = require('express');
+var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-const app = require('../app');
-var connect = require('connect');
-const { useParams } = require('react-router-dom');
+const app = require("../app");
+var connect = require("connect");
+const { useParams } = require("react-router-dom");
 var eApp = connect();
 var router = express.Router();
-var Int32 = require('mongoose-int32');
+var Int32 = require("mongoose-int32");
 
-require('dotenv').config();
+require("dotenv").config();
 
 eApp.use(bodyParser.json());
-eApp.use(bodyParser.urlencoded({
-  extended: true
-}));
+eApp.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
 console.log("Attempting DB Connection");
 
-const bookConn = mongoose.createConnection("mongodb+srv://"+process.env.DB_USER+":"+process.env.DB_PASS+process.env.DB_BOOK_LOCATION, {useNewUrlParser: true, useUnifiedTopology: true})
-bookConn.on('error', err => {
-    console.error("Could not connect to database", err)
- });
-bookConn.on('connected', () => {
-  console.log('Book DB Connected Sucessfully');
+const bookConn = mongoose.createConnection(
+  "mongodb+srv://" +
+    process.env.DB_USER +
+    ":" +
+    process.env.DB_PASS +
+    process.env.DB_BOOK_LOCATION,
+  { useNewUrlParser: true, useUnifiedTopology: true }
+);
+bookConn.on("error", (err) => {
+  console.error("Could not connect to database", err);
+});
+bookConn.on("connected", () => {
+  console.log("Book DB Connected Sucessfully");
 });
 
 //create schema for db
@@ -44,33 +53,43 @@ const bookSchema = {
 const Book = bookConn.model("Book", bookSchema);
 
 /* GET books listing. */
-router.get('/', function(req, res, next) {
-
-Book.find({}, function(err, books){
- console.log("working");
-  res.send(books);
-
-});
+router.get("/", function (req, res, next) {
+  Book.find({}, function (err, books) {
+    console.log("working");
+    res.send(books);
+  });
 });
 
-/*GET individual book by title*/
-router.get('/book', function(req, res, next) {
-
+/*GET individual books*/
+router.get("/book", function (req, res, next) {
   console.log(req.query.title);
 
   var title = req.query.title;
 
-  Book.findOne({title: title}, function(err, result){
+  Book.findOne({ title: title }, function (err, result) {
     if (err) {
       console.log(err);
-    }
-    else {
+    } else {
       console.log(title);
       console.log(result);
       res.json(result);
     }
-  })
+  });
 });
+
+/*GET individual book by author*/
+router.get("/book/author", (req, res, next) => {
+  var author = req.query;
+
+  Book.find(author, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
 
 /*GET individual book by ID*/
 router.get('/book/id', (req, res, next) => {
@@ -86,60 +105,59 @@ router.get('/book/id', (req, res, next) => {
   })
 });
 
-  /*POST individual books*/
-  router.post('/addBook',(req, res, next) => {
-        let book = new Book(req.body);
-        book.save(function (err, post) {
-    if (err) { return next(err) }
-    res.json(201, post)
-    });
+
+/*POST individual books*/
+router.post("/addBook", (req, res, next) => {
+  let book = new Book(req.body);
+  book.save(function (err, post) {
+    if (err) {
+      return next(err);
+    }
+    res.json(201, post);
   });
+});
 
 //  var {ObjectID} = require('mongodb');
-  /*DELETE books*/
-  router.delete('/deleteBook',(req,res)=>{
+/*DELETE books*/
+router.delete("/deleteBook", (req, res) => {
+  console.log("Hey buddy");
+  var bookTitle = req.body.title;
 
-    console.log('Hey buddy');
-    var bookTitle = req.body.title;
+  console.log(bookTitle);
 
-    console.log(bookTitle);
-
-    Book.deleteOne({title: bookTitle}).then(function(){
+  Book.deleteOne({ title: bookTitle })
+    .then(function () {
       console.log("Deleting Book");
-    }).catch(function(error){
-        console.log(error);
+    })
+    .catch(function (error) {
+      console.log(error);
     });
-    res.send('Book deleted');
-  });
-
-
+  res.send("Book deleted");
+});
 
 //PUT and PATCH: under construction
-    /*PUT Individual books for editing*/
-    router.put((req,res) => {
-            Book.findById(req.params._id, (err, book) => {
-                book.title = req.body.title;
-                book.author = req.body.author;
-                book.save()
-                res.json(book)
-            })
-        });
-
-    router.patch((req,res)=>{
-                Book.findById(req.params.bookId, (err, book) => {
-                    if(req.body._id){
-                        delete req.body._id;
-                    }
-                    for( let b in req.body ){
-                        book[b] = req.body[b];
-                    }
-                    book.save();
-                    res.json(book);
-                })
+/*PUT Individual books for editing*/
+router.put((req, res) => {
+  Book.findById(req.params._id, (err, book) => {
+    book.title = req.body.title;
+    book.author = req.body.author;
+    book.save();
+    res.json(book);
   });
+});
 
-
-
+router.patch((req, res) => {
+  Book.findById(req.params.bookId, (err, book) => {
+    if (req.body._id) {
+      delete req.body._id;
+    }
+    for (let b in req.body) {
+      book[b] = req.body[b];
+    }
+    book.save();
+    res.json(book);
+  });
+});
 
 /*        Book.findByIdAndRemove(req.params._id, (err, book) => {
 
