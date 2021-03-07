@@ -47,6 +47,7 @@ const bookSchema = {
   date: Date,
   description: String,
   publisher: String,
+  reviews: [],
 };
 
 //bind schema to object
@@ -134,6 +135,27 @@ router.delete("/deleteBook", (req, res) => {
     });
   res.send("Book deleted");
 });
+
+//Add a review
+router.post('/addReview',(req,res) => {
+  var id = req.query._id;
+  var userName = req.query.userName;
+  var headline = req.query.headline;
+  var comment = req.query.comment;
+  var rating = req.query.rating;
+  Book.findOneAndUpdate({_id: id}, 
+  {
+    $push: {reviews: {
+      userName: userName,
+      headline: headline,
+      comment: comment,
+      rating: rating}}
+  },
+  (err, result) => {
+  })
+  res.send('Added Review');
+});
+
 
 //PUT and PATCH: under construction
 /*PUT Individual books for editing*/

@@ -39,7 +39,7 @@ function BookDetails() {
   return (
     <div class="container" id="detailscontainer">
       <BookInfo book={book} />
-      <CommentingRating />
+      <CommentingRating book={book} />
     </div>
   );
 }
