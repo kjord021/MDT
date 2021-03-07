@@ -8,6 +8,34 @@ function CommentingRating(props) {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const id = props.book._id;
+  const reviews = props.book.reviews || [];
+
+  function displayReviews() {
+    if (!reviews.length) return null;
+
+    return reviews.map((review, index) => (
+      <div key={index}>
+        <h5>{review.headline}</h5>
+        <StarRatings
+          rating={Number(review.rating)}
+          starRatedColor="blue"
+          numberOfStars={5}
+          name="review"
+          starDimension="15px"
+        />
+        <p>{review.comment}</p>
+        <br />
+        <br />
+      </div>
+    ));
+  }
+
+  function ratingAverage() {
+    var sum = 0;
+    var size = 0;
+    reviews.map((review, index) => (sum = sum + Number(review.rating)));
+    return Math.round((sum / reviews.length) * 100) / 100 || 0;
+  }
 
   function onFormSubmit(e) {
     axios.post(
@@ -107,13 +135,13 @@ function CommentingRating(props) {
               <div class="col-lg-4" align="center">
                 <h3>Overall Rating</h3>
                 <StarRatings
-                  rating={4.4}
+                  rating={Number(ratingAverage())}
                   starRatedColor="blue"
                   numberOfStars={5}
                   name="rating"
                   starDimension="35px"
                 />
-                <h4> {4.4} out of 5</h4>
+                <h4> {Number(ratingAverage())} out of 5</h4>
               </div>
 
               <div class="col-lg-4" align="Center">
@@ -133,9 +161,7 @@ function CommentingRating(props) {
             <h3>Featured Reviews</h3>
             <br />
             <br />
-            <br />
-            <br />
-            <br />
+            {displayReviews()}
             <br />
           </div>
         </div>
