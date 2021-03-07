@@ -1,11 +1,29 @@
 import React, { useState } from "react";
 import StarRatings from "react-star-ratings";
+import axios from "axios";
 
 function CommentingRating(props) {
   const [createReview, setCreateReview] = useState(false);
   const [headline, setHeadline] = useState("");
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
+  const id = props.book._id;
+
+  function onFormSubmit(e) {
+    axios.post(
+      `http://localhost:5000/books/addReview`,
+      {},
+      {
+        params: {
+          userName: "username",
+          _id: id,
+          rating: rating,
+          headline: headline,
+          comment: comment,
+        },
+      }
+    );
+  }
 
   if (createReview) {
     return (
@@ -36,7 +54,7 @@ function CommentingRating(props) {
                 <hr />
               </div>
               <div class="col-lg-12">
-                <form>
+                <form onSubmit={onFormSubmit}>
                   <br />
                   <h4>Add a Headline</h4>
                   <br />
