@@ -33,6 +33,9 @@ const userSchema = {
   homeAddress: String,
   creditCard: Object,
   creditCards: Array,
+  shippingAddresses: [
+    String
+  ],
   cart: [{
     book: Object,
     quantity: Number
@@ -175,6 +178,64 @@ router.put('/cart/add', function(req, res) {
   )
 });
 
+/*PUT new shipping address to array */
+router.put('/update/Shipping', function(req, res) {
+  var userName = req.body.userName;
+  var address = req.body.address;
+
+  User.updateOne(
+    {userName: userName},
+    {$push: {"shippingAddresses": [address]}}, (err) => {
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Address added to Array');
+      }
+    }
+  )
+});
+
+/* DELETE an address using put*/
+router.put('/add/address', function(req, res){
+  const userName = req.body.userName;
+  const address = req.body.address;
+
+  console.log(address);
+
+  User.updateOne(
+    {userName: userName},
+    {$push: {"shippingAddresses": address}}, (err) => {
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Address removed from Array');
+      }
+    }
+  )
+
+});
+
+/* DELETE an address using put*/
+router.put('/delete/address', function(req, res){
+  const userName = req.body.userName;
+  const address = req.body.address;
+
+  console.log(address);
+
+  User.updateOne(
+    {userName: userName},
+    {$pull: {"shippingAddresses": address}}, (err) => {
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Address removed from Array');
+      }
+    }
+  )
+
+});
+
+
 /* PUT A single user to update. */
 router.put('/update', function(req, res){
 
@@ -259,6 +320,7 @@ router.put('/update', function(req, res){
     });
   }
 });
+
 
 /* DELETE A single user to delete. */
 router.delete('/delete', function(req, res){
