@@ -10,6 +10,7 @@ import EditHomeAddress from "./EditHomeAddress";
 import EditNick from "./EditNick";
 import EditEmail from "./EditEmail";
 import EditPassword from "./EditPassword";
+import AddAddress from "./AddAddress";
 import MyAccountPayment from "./MyAccountPayment";
 import MyAccountShipping from "./MyAccountShipping";
 import Cart from "./Cart";
@@ -35,6 +36,7 @@ function App() {
   const [homeAddress, setHomeAddress] = useState("");
   const [creditCards, setCreditCards] = useState([]);
   const [shoppingCart, setShoppingCart] = useState([]);
+  const [shippingAddresses, setShippingAddresses] = useState([]);
 
   // //Call the useEffect hook
   // useEffect(() =>{
@@ -70,6 +72,7 @@ function App() {
     setEmailAddress("");
     setHomeAddress("");
     setCreditCards([]);
+    setShippingAddresses([]);
   }
 
   function getUserInformation(information) {
@@ -82,6 +85,7 @@ function App() {
     setHomeAddress(tempObject.homeAddress);
     setEmailAddress(tempObject.emailAddress);
     setShoppingCart(tempObject.cart);
+    setShippingAddresses(tempObject.shippingAddresses);
   }
 
   function updateCart(data) {
@@ -159,10 +163,20 @@ function App() {
               logUserOut={logUserOut}
             />
           </Route>
+          <Route path="/AddAddress">
+            <AddAddress
+              userName={userName}
+              isLoggedIn={isLoggedIn}
+              logUserOut={logUserOut}
+              shippingAddresses = {shippingAddresses}
+            />
+          </Route>
           <Route path="/ShippingInformation">
             <MyAccountShipping
               name={fullName}
               homeAddress={homeAddress}
+              userName = {userName}
+              shippingAddresses = {shippingAddresses}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
