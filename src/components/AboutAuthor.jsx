@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import axios from "axios";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function AboutAuthor(props) {
   const [booklist, setBooklist] = useState([]);
@@ -12,8 +13,6 @@ function AboutAuthor(props) {
       .then((response) => setBooklist(response.data))
       .catch((error) => console.log(error));
   }, []);
-
-  console.log(booklist);
 
   return (
     <div class="row">
@@ -38,30 +37,39 @@ function AboutAuthor(props) {
             <div class="container">
               <div class="row">
                 {booklist.map((book) => {
-                  const { title, cover, genre } = book;
+                  console.log(book);
+                  const { title, cover, genre, _id } = book;
                   return (
                     <div class="col-sm-12 col-lg-6">
-                      <div class="card mb-3">
-                        <div class="row no-gutters">
-                          <div class="col-lg-4">
-                            <img
-                              src={cover}
-                              class="author-card-img"
-                              alt="book cover"
-                            />
-                          </div>
-                          <div class="col-lg-8">
-                            <div class="card-body">
-                              <h5 class="card-title">{title}</h5>
-                              <hr />
-                              <h6 class="card-text">
-                                Price: ${book.price?.$numberDecimal}
-                              </h6>
-                              <h6 class="card-text">Genre: {genre}</h6>
+                      <Link
+                        to={{
+                          pathname: "/bookDetails",
+                          id: _id,
+                        }}
+                        style={{ textDecoration: "inherit", color: "inherit" }}
+                      >
+                        <div class="card mb-3">
+                          <div class="row no-gutters">
+                            <div class="col-lg-4">
+                              <img
+                                src={cover}
+                                class="author-card-img"
+                                alt="book cover"
+                              />
+                            </div>
+                            <div class="col-lg-8">
+                              <div class="card-body">
+                                <h5 class="card-title">{title}</h5>
+                                <hr />
+                                <h6 class="card-text">
+                                  Price: ${book.price?.$numberDecimal}
+                                </h6>
+                                <h6 class="card-text">Genre: {genre}</h6>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     </div>
                   );
                 })}

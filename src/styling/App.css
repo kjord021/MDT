@@ -131,8 +131,8 @@ a:visited {
 
 .cart-card-img {
   display: block;
-  max-width:250px;
-  max-height:250px;
+  max-width: 250px;
+  max-height: 250px;
   width: auto;
   height: auto;
   border-radius: 15px 50px;
@@ -211,4 +211,9 @@ a:visited {
 .author-card-img {
   width: auto;
   height: 190px;
+}
+
+.book-desc {
+  height: 70px;
+  overflow: auto;
 }
