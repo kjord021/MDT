@@ -38,6 +38,10 @@ function AddAddress(props){
         );
     }
 
+    if (!props.isLoggedIn()) {
+        return (<Redirect to='/Login' />);
+     }
+
     return(
         <>
         {redirectState ? <Redirect to="/Login" /> : null}
