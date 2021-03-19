@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './styling/index.css';
 import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.css';
-import Card from './Cads/Cards';
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
 import reportWebVitals from './reportWebVitals';

@@ -3,8 +3,6 @@ import CardUI from "../Cads/CardUI";
 import axios from "axios";
 
 function Home(){
-    var cards;
-    var data;
     const [books, setBooks] = useState([]);
         axios
           .get("http://localhost:5000/books/", {
@@ -14,13 +12,6 @@ function Home(){
 
             setBooks(response.data);
 
-          /*
-          books.map((book) =>
-             <CardUI
-              title = {book.title}
-             />
-             */
-
           },
 
           (error) => {
@@ -28,21 +19,36 @@ function Home(){
           }
         );
 
+    var cards = books.map((book) => 
+      <div class = "col-sm-6">
+        <CardUI
+        title = {book.title}
+        imgsrc = {book.cover}
+        description = {book.description}
+        />
+      </div>
+    )
+
+
 
 return (
   <>
-
-<>CardUI
-
-</>
-
-  { books.forEach(book =>
-
-     <CardUI title = {book.title}/>
-
-    )}
-
-
+  <div class="container">
+      <br/>
+      <div class = "row">
+        <div class = "col-sm-4">
+        </div>
+        <div class = "col-sm-4">
+        <input />
+        </div>
+        <div class = "col-sm-4">
+        </div>
+      </div>
+      <br />
+      <div class = "row">
+          {cards}
+      </div>
+   </div>
   </>
 );
 
