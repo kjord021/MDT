@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import BookInfo from "./subcomponents/BookInfo";
 import CommentingRating from "./subcomponents/CommentingRating";
 import axios from "axios";
+import { withRouter } from "react-router";
 
 // Placeholder book object
 
@@ -22,10 +23,13 @@ const book = {
 };
 */
 
-function BookDetails() {
-  // This title will be passed in as a param when we have the book browsing done
-  const title = "Harry Potter and the Chamber of Secrets";
-  const url = "http://localhost:5000/books/book?title=" + title;
+function BookDetails(props) {
+  // Testing
+  // const title = "Harry Potter and the Chamber of Secrets";
+  // const url = "http://localhost:5000/books/book?title=" + title;
+
+  // Routing from about author page
+  const url = "http://localhost:5000/books/book/id?_id=" + props.location.id;
 
   const [book, setBook] = useState([]);
 
@@ -44,4 +48,4 @@ function BookDetails() {
   );
 }
 
-export default BookDetails;
+export default withRouter(BookDetails);
