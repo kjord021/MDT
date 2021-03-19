@@ -22,7 +22,7 @@ const book = {
 };
 */
 
-function BookDetails() {
+function BookDetails(props) {
   // This title will be passed in as a param when we have the book browsing done
   const title = "Harry Potter and the Chamber of Secrets";
   const url = "http://localhost:5000/books/book?title=" + title;
@@ -39,7 +39,7 @@ function BookDetails() {
   return (
     <div class="container" id="detailscontainer">
       <BookInfo book={book} />
-      <CommentingRating book={book} />
+      <CommentingRating book={book} login={props} />
     </div>
   );
 }

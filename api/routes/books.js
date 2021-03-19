@@ -139,17 +139,23 @@ router.delete("/deleteBook", (req, res) => {
 //Add a review
 router.post('/addReview',(req,res) => {
   var id = req.query._id;
-  var userName = req.query.userName;
+  var userName = req.query.username;
+  var nickName = req.query.nickname;
   var headline = req.query.headline;
   var comment = req.query.comment;
   var rating = req.query.rating;
+  var isAnonymous = req.query.isAnonymous;
+  var showNickname = req.query.showNickname;
   Book.findOneAndUpdate({_id: id}, 
   {
     $push: {reviews: {
       userName: userName,
+      nickName: nickName,
       headline: headline,
       comment: comment,
-      rating: rating}}
+      rating: rating,
+      isAnonymous: isAnonymous,
+      showNickname: showNickname}}
   },
   (err, result) => {
   })

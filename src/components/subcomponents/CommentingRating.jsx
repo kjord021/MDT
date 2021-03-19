@@ -7,14 +7,46 @@ function CommentingRating(props) {
   const [headline, setHeadline] = useState("");
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
+  const [showNickname, setShowNickname] = useState(0);
+  const [isAnonymous, setAnonymous] = useState(0);
   const id = props.book._id;
+  const username = props.login.userName || "Missing";
+  const nickname = props.login.nickName || "Missing";
   const reviews = props.book.reviews || [];
+
+  function handleAnonymous(x, y) {
+    if (y == 0) return x;
+    else return "anonymous";
+  }
+
+  function handleNickname(x, y) {
+    if (y == 0) return x;
+    else return "default";
+  }
 
   function displayReviews() {
     if (!reviews.length) return null;
 
     return reviews.map((review, index) => (
       <div key={index}>
+        <div class="row no-gutters">
+          <div class="col-lg-4"></div>
+          <div class="col-lg-2" align="center">
+            <img
+              src="https://images-na.ssl-images-amazon.com/images/S/amazon-avatars-global/default._CR0,0,1024,1024_SX48_.png"
+              class="img-thumbnail"
+              alt="Profile"
+            />
+          </div>
+          <div class="col-lg-2" align="center">
+            <br />
+            <h6>
+              {"--- " + handleAnonymous(review.userName, review.isAnonymous)}
+            </h6>
+          </div>
+          <div class="col-lg-4"></div>
+        </div>
+        <br />
         <h5>{review.headline}</h5>
         <StarRatings
           rating={Number(review.rating)}
@@ -23,8 +55,18 @@ function CommentingRating(props) {
           name="review"
           starDimension="15px"
         />
-        <p>{review.comment}</p>
-        <br />
+        <p>
+          <br />
+          {review.comment}
+        </p>
+        <p>{"~" + handleNickname(review.nickName, review.showNickname)}</p>
+        <div class="row no-gutters">
+          <div class="col-lg-4"></div>
+          <div class="col-lg-4">
+            <hr />
+          </div>
+          <div class="col-lg-4"></div>
+        </div>
         <br />
       </div>
     ));
@@ -43,11 +85,14 @@ function CommentingRating(props) {
       {},
       {
         params: {
-          userName: "username",
+          username: username,
+          nickname: nickname,
           _id: id,
           rating: rating,
           headline: headline,
           comment: comment,
+          isAnonymous: isAnonymous,
+          showNickname: showNickname,
         },
       }
     );
@@ -61,23 +106,63 @@ function CommentingRating(props) {
           <div class="card mb-3">
             <div class="row no-gutters">
               <br />
-              <div class="col-lg-5">
+              <div class="col-lg-3" align="Center">
+                <br />
+                <br />
+                <button
+                  onClick={() => setCreateReview(false)}
+                  class="btn btn-outline-secondary btn-sm"
+                >
+                  Go Back
+                </button>
+              </div>
+              <div class="col-lg-6">
                 <br />
                 <h3>Create Review</h3>
+                <br />
+                <br />
+              </div>
+              <div class="col-lg-3"></div>
+              <div class="col-lg-3"></div>
+              <div class="col-lg-3">
+                <h4>Overall Rating:</h4>
+              </div>
+              <div class="rating col-lg-4">
+                <StarRatings
+                  rating={rating}
+                  changeRating={(e) => setRating(e)}
+                  starRatedColor="blue"
+                  numberOfStars={5}
+                  name="creat rating"
+                  isSelectable
+                  starDimension="35px"
+                />
+              </div>
+              <div class="col-lg-2"></div>
+              <br />
+              <br />
+              <br />
+              <br />
+              <div class="col-lg-3"></div>
+              <div class="col-lg-3">
+                <h6>Keep Anonymous:</h6>
+                <input
+                  type="checkbox"
+                  name="check[0]"
+                  onChange={(e) => setAnonymous(1 - e.target.value)}
+                  value={isAnonymous}
+                ></input>
+              </div>
+              <div class="col-lg-3">
+                <h6>Hide Nickname:</h6>
+                <input
+                  type="checkbox"
+                  name="check[0]"
+                  onChange={(e) => setShowNickname(1 - e.target.value)}
+                  value={showNickname}
+                ></input>
               </div>
               <div class="col-lg-12">
-                <h4>Overall Rating</h4>
-                <div class="rating">
-                  <StarRatings
-                    rating={rating}
-                    changeRating={(e) => setRating(e)}
-                    starRatedColor="blue"
-                    numberOfStars={5}
-                    name="creat rating"
-                    isSelectable
-                    starDimension="35px"
-                  />
-                </div>
                 <br />
                 <hr />
               </div>
