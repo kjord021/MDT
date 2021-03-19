@@ -57,7 +57,7 @@ const Book = bookConn.model("Book", bookSchema);
 router.get("/", function (req, res, next) {
   Book.find({}, function (err, books) {
     console.log("working");
-    res.send(books);
+    res.json(books);
   });
 });
 
@@ -143,7 +143,7 @@ router.post('/addReview',(req,res) => {
   var headline = req.query.headline;
   var comment = req.query.comment;
   var rating = req.query.rating;
-  Book.findOneAndUpdate({_id: id}, 
+  Book.findOneAndUpdate({_id: id},
   {
     $push: {reviews: {
       userName: userName,
