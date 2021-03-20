@@ -129,6 +129,13 @@ a:visited {
   height: 40px;
 }
 
+.cart-refresh-img {
+  display: flex;
+  justify-content: flex-end;
+  width: 25px;
+  height: 25px;
+}
+
 .cart-card-img {
   display: block;
   max-width: 250px;
