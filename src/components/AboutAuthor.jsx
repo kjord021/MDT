@@ -1,21 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import axios from "axios";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 
 function AboutAuthor(props) {
   const [booklist, setBooklist] = useState([]);
   const url =
     "http://localhost:5000/books/book/author?author=" + props.location.author;
+  const [is404, setIs404] = useState(false);
   useEffect(() => {
     axios
       .get(url)
       .then((response) => setBooklist(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        if (error.response.status === 404) {
+          setIs404(true);
+        }
+        console.log(error);
+      });
   }, []);
 
   return (
     <div class="row">
+      {is404 ? <Redirect to="/404" /> : null}
       <div class="col-lg-3"></div>
       <div class="col-lg-6">
         <div class="card mb-3" style={{ marginTop: "4vh" }}>
@@ -40,7 +53,7 @@ function AboutAuthor(props) {
                   console.log(book);
                   const { title, cover, genre, _id } = book;
                   return (
-                    <div class="col-sm-12 col-lg-6">
+                    <div class="col-sm-6 col-lg-4">
                       <Link
                         to={{
                           pathname: "/bookDetails",
@@ -50,21 +63,23 @@ function AboutAuthor(props) {
                       >
                         <div class="card mb-3">
                           <div class="row no-gutters">
-                            <div class="col-lg-4">
+                            <div class="col-sm-12">
                               <img
                                 src={cover}
                                 class="author-card-img"
                                 alt="book cover"
                               />
                             </div>
-                            <div class="col-lg-8">
-                              <div class="card-body">
-                                <h5 class="card-title">{title}</h5>
-                                <hr />
-                                <h6 class="card-text">
-                                  Price: ${book.price?.$numberDecimal}
-                                </h6>
-                                <h6 class="card-text">Genre: {genre}</h6>
+                            <div class="row no-gutters">
+                              <div class="col-sm-12">
+                                <div class="card-body">
+                                  <h5 class="card-title">{title}</h5>
+                                  <hr />
+                                  <h6 class="card-text">
+                                    Price: ${book.price?.$numberDecimal}
+                                  </h6>
+                                  <h6 class="card-text">Genre: {genre}</h6>
+                                </div>
                               </div>
                             </div>
                           </div>
