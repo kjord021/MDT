@@ -19,6 +19,7 @@ import Search from "./Search";
 import Nav from "./Nav";
 import BookDetails from "./BookDetails";
 import AboutAuthor from "./AboutAuthor";
+import ErrorPage from "./404";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 
@@ -91,8 +92,8 @@ function App() {
   }
 
   function updateCart(data) {
-    var userData = JSON.parse(data)
-    setShoppingCart(userData.cart)
+    var userData = JSON.parse(data);
+    setShoppingCart(userData.cart);
   }
 
   return (
@@ -170,7 +171,7 @@ function App() {
               userName={userName}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
-              shippingAddresses = {shippingAddresses}
+              shippingAddresses={shippingAddresses}
             />
           </Route>
           <Route path="/AddCard">
@@ -185,8 +186,8 @@ function App() {
             <MyAccountShipping
               name={fullName}
               homeAddress={homeAddress}
-              userName = {userName}
-              shippingAddresses = {shippingAddresses}
+              userName={userName}
+              shippingAddresses={shippingAddresses}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
@@ -195,13 +196,18 @@ function App() {
             <MyAccountPayment
               name={fullName}
               userName={userName}
-              creditCards = {creditCards}
+              creditCards={creditCards}
               isLoggedIn={isLoggedIn}
               logUserOut={logUserOut}
             />
           </Route>
           <Route path="/BookDetails">
-            <BookDetails />
+            <BookDetails
+              userName={userName}
+              nickName={nickName}
+              isLoggedIn={isLoggedIn}
+              logUserOut={logUserOut}
+            />
           </Route>
           <Route path="/Author/">
             <AboutAuthor />
@@ -229,6 +235,9 @@ function App() {
           </Route>
           <Route path="/Dashboard">
             <Home />
+          </Route>
+          <Route path="/404">
+            <ErrorPage />
           </Route>
           <Route path="/">
             <Home />
