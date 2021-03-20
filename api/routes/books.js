@@ -143,6 +143,8 @@ router.post('/addReview',(req,res) => {
   var headline = req.query.headline;
   var comment = req.query.comment;
   var rating = req.query.rating;
+  var isAnonymous = req.query.isAnonymous;
+  var showNickname = req.query.showNickname;
   Book.findOneAndUpdate({_id: id},
   {
     $push: {reviews: {
