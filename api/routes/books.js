@@ -84,6 +84,7 @@ router.get("/book/author", (req, res, next) => {
 
   Book.find(author, (err, result) => {
     if (err) {
+      res.sendStatus(404);
       console.log(err);
     } else {
       res.json(result);
@@ -91,21 +92,19 @@ router.get("/book/author", (req, res, next) => {
   });
 });
 
-
 /*GET individual book by ID*/
-router.get('/book/id', (req, res, next) => {
+router.get("/book/id", (req, res, next) => {
   var id = req.query;
 
   Book.findById(id, (err, result) => {
-    if(err) {
+    if (err) {
+      res.sendStatus(404);
       console.log(err);
-    }
-    else {
+    } else {
       res.json(result);
     }
-  })
+  });
 });
-
 
 /*POST individual books*/
 router.post("/addBook", (req, res, next) => {
@@ -137,7 +136,7 @@ router.delete("/deleteBook", (req, res) => {
 });
 
 //Add a review
-router.post('/addReview',(req,res) => {
+router.post("/addReview", (req, res) => {
   var id = req.query._id;
   var userName = req.query.username;
   var nickName = req.query.nickname;
@@ -161,7 +160,6 @@ router.post('/addReview',(req,res) => {
   })
   res.send('Added Review');
 });
-
 
 //PUT and PATCH: under construction
 /*PUT Individual books for editing*/

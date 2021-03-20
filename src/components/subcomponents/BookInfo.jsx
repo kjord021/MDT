@@ -23,7 +23,9 @@ function BookInfo(props) {
                 <h5 id="bookauthor" class="card-title">
                   By {props.book.author}
                 </h5>
-                <p class="card-text">{props.book.description}</p>
+                <p class="card-text" class="book-desc">
+                  {props.book.description}
+                </p>
                 <p id="bookdetails" class="card-text">
                   <span style={{ paddingRight: "71px", fontWeight: "500" }}>
                     PUBLISHER

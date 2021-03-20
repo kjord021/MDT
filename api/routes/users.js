@@ -164,16 +164,16 @@ router.post('/register', function(req, res){
 
 /*PUT new book to cart*/
 router.put('/cart/add', function(req, res) {
-  const book = req.body.book;
-  var quantity = req.body.quantity;
-  const userID = req.body.userID;
+  const book = req.body.book; //records book data passed to API
+  var quantity = req.body.quantity; // records quantity passed to API
+  const userID = req.body.userID; // records UserID to add cart items to right user
 
   if (quantity == null) {
     quantity = 1
   }
   User.updateOne(
-    {_id: userID},
-    {$push: {"cart": [{"book": book, "quantity": quantity}]}}, (err) => {
+    {_id: userID}, //finds user by ID
+    {$push: {"cart": [{"book": book, "quantity": quantity}]}}, (err) => { //add data in to existing cart
       if (err){
         console.log(err);
       } else {
@@ -381,7 +381,7 @@ router.delete('/delete', function(req, res){
 
 /*DELETE item from cart*/
 router.delete("/cart/delete", (req, res) => {
-  const cartItemID = req.body.cartId;
+  const cartItemID = req.body.cartID;
   const userID = req.body.userID;
 
   User.updateOne(
@@ -398,7 +398,7 @@ router.delete("/cart/delete", (req, res) => {
 
 /*PATCH quantity in cart*/
 router.patch("/cart/update", (req, res) => {
-  const cartItemID = req.body.cartId
+  const cartItemID = req.body.cartID
   const userID = req.body.userID;
   const newQuantity = req.body.quantity
 

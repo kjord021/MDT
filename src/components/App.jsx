@@ -18,6 +18,7 @@ import Cart from "./Cart";
 import Nav from "./Nav";
 import BookDetails from "./BookDetails";
 import AboutAuthor from "./AboutAuthor";
+import ErrorPage from "./404";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 
@@ -225,6 +226,9 @@ function App() {
           </Route>
           <Route path="/Dashboard">
             <Home />
+          </Route>
+          <Route path="/404">
+            <ErrorPage />
           </Route>
           <Route path="/">
             <Home />
