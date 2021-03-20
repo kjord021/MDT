@@ -57,7 +57,7 @@ const Book = bookConn.model("Book", bookSchema);
 router.get("/", function (req, res, next) {
   Book.find({}, function (err, books) {
     console.log("working");
-    res.send(books);
+    res.json(books);
   });
 });
 
