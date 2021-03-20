@@ -9,7 +9,7 @@ function Cart(props) {
 
   const [books, setBooks] = useState([]); 
   const [cart, setCart] = useState([]);
-  //const [load, setLoad] = useState(true)
+  const [load, setLoad] = useState(true)
 
   //console.log("books",books) //for debugging
   //console.log("cart",cart) //for debugging
@@ -17,7 +17,13 @@ function Cart(props) {
   useEffect(() => {
     getUserCart();
     getBookData();
-  }, [cart.length]);
+    setLoad(true)
+  }, [load]);
+
+  useEffect(() => {
+    setLoad(false)
+  }, [])
+
 
   const getUserCart = () => {
     axios
@@ -59,11 +65,11 @@ function Cart(props) {
                 }
               })
               totalCost = (parseFloat(book.price?.$numberDecimal) * parseFloat(cartItem.quantity)) + totalCost 
-              return <div key={i}>{<CartInfo book={book} cartItem={cartItem} userID={props.userID}/>}</div>
+              return <div key={i}>{<CartInfo book={book} cartItem={cartItem} userID={props.userID} setLoad={setLoad}/>}<br/></div>
             }
           })}
         </div>
-        <h4 id="total">Total Cost: ${totalCost.toFixed(2)}</h4>
+        <h4 id="total">Subtotal: ${totalCost.toFixed(2)}</h4>
       </div>
     );
   }

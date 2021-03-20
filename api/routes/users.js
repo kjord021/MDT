@@ -381,7 +381,7 @@ router.delete('/delete', function(req, res){
 
 /*DELETE item from cart*/
 router.delete("/cart/delete", (req, res) => {
-  const cartItemID = req.body.cartId;
+  const cartItemID = req.body.cartID;
   const userID = req.body.userID;
 
   User.updateOne(
@@ -398,7 +398,7 @@ router.delete("/cart/delete", (req, res) => {
 
 /*PATCH quantity in cart*/
 router.patch("/cart/update", (req, res) => {
-  const cartItemID = req.body.cartId
+  const cartItemID = req.body.cartID
   const userID = req.body.userID;
   const newQuantity = req.body.quantity
 
