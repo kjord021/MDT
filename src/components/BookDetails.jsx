@@ -52,7 +52,7 @@ function BookDetails(props) {
     <div class="container" id="detailscontainer">
       {is404 ? <Redirect to="/404" /> : null}
       <BookInfo book={book} />
-      <CommentingRating book={book} />
+      <CommentingRating book={book} login={props} />
     </div>
   );
 }
