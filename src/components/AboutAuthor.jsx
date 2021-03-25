@@ -50,7 +50,6 @@ function AboutAuthor(props) {
             <div class="container">
               <div class="row">
                 {booklist.map((book) => {
-                  console.log(book);
                   const { title, cover, genre, _id } = book;
                   return (
                     <div class="col-sm-6 col-lg-4">
