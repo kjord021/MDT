@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {Redirect} from "react-router-dom";
 import CartInfo from "./subcomponents/CartInfo";
+import SaveLater from "./subcomponents/SaveLater"
 import axios from "axios";
 
 function Cart(props) {
@@ -10,17 +11,18 @@ function Cart(props) {
   const [books, setBooks] = useState([]); 
   const [cart, setCart] = useState([]);
   const [load, setLoad] = useState(true)
+ 
 
   //console.log("books",books) //for debugging
   //console.log("cart",cart) //for debugging
 
-  useEffect(() => {
+  useEffect(() => { //builds cart data
     getUserCart();
     getBookData();
     setLoad(true)
-  }, [load]);
+  }, [load, cart.length]);
 
-  useEffect(() => {
+  useEffect(() => { //builds save for later data
     setLoad(false)
   }, [])
 
@@ -46,6 +48,12 @@ function Cart(props) {
     .catch((error) => console.log(error));
 })}
 
+  var saveCards = books.map((book) => 
+    <div class="col-sm-6">
+    <SaveLater/>
+    </div>
+  )
+
     if (!props.isLoggedIn()) {
         return (<Redirect to='/Login' />);
     }
@@ -56,7 +64,7 @@ function Cart(props) {
           <button type="submit" class="btn btn-dark" onClick={() => {getUserCart(); getBookData();}}>
               Refresh
           </button>
-          <hr />
+          <hr/>
           {books.map((book, i) => {
             if (cart[i] != undefined) {
               cart.forEach((item) => {
@@ -70,6 +78,14 @@ function Cart(props) {
           })}
         </div>
         <h4 id="total">Subtotal: ${totalCost.toFixed(2)}</h4>
+        <hr/>
+        <div class="container">
+          <h1>Save for Later </h1>
+          <div class="row">
+            {saveCards}
+          </div>
+          <br/>
+        </div>
       </div>
     );
   }
