@@ -10,7 +10,9 @@ function Cart(props) {
 
   const [books, setBooks] = useState([]); 
   const [cart, setCart] = useState([]);
-  const [load, setLoad] = useState(true)
+  const [save, setSave] = useState([]);
+  const [saveBooks, setSaveBooks] = useState([]);
+  const [load, setLoad] = useState(false)
  
 
   //console.log("books",books) //for debugging
@@ -23,8 +25,10 @@ function Cart(props) {
   }, [load, cart.length]);
 
   useEffect(() => { //builds save for later data
-    setLoad(false)
-  }, [])
+    getSave();
+    getSaveData();
+    setLoad(true)
+  }, [load, save.length])
 
 
   const getUserCart = () => {
@@ -35,7 +39,7 @@ function Cart(props) {
       setCart(data)
     })
     .catch((error) => console.log(error));
-  }
+  };
 
   const getBookData = () => {
     setBooks([])
@@ -46,11 +50,32 @@ function Cart(props) {
       setBooks(books => [...books, response.data]) 
     })
     .catch((error) => console.log(error));
-})}
+})};
 
-  var saveCards = books.map((book) => 
+const getSave = () => {
+  axios
+  .get("http://localhost:5000/users/user/", {params: {userName:props.userName}})
+  .then((response) => {
+    const data = response.data.saveForLater
+    setSave(data)
+  })
+  .catch((error) => console.log(error));
+}
+
+const getSaveData = () => {
+  setSaveBooks([])
+  save.map((cart, i) => {
+  axios
+  .get("http://localhost:5000/books/book/id", {params: {_id:cart.book}})
+  .then((response) => {
+    setSaveBooks(saveBooks => [...saveBooks, response.data]) 
+  })
+  .catch((error) => console.log(error));
+})};
+
+  var saveCards = saveBooks.map((book) => 
     <div class="col-sm-6">
-    <SaveLater/>
+    <SaveLater book={book}/>
     </div>
   )
 
