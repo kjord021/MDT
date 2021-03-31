@@ -202,12 +202,7 @@ function App() {
             />
           </Route>
           <Route path="/BookDetails">
-            <BookDetails
-              userName={userName}
-              nickName={nickName}
-              isLoggedIn={isLoggedIn}
-              logUserOut={logUserOut}
-            />
+            <BookDetails isLoggedIn={isLoggedIn} userID={userID} />
           </Route>
           <Route path="/Author/">
             <AboutAuthor />
