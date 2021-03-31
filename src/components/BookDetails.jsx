@@ -12,7 +12,7 @@ function BookDetails(props) {
   //const url = "http://localhost:5000/books/book?title=" + title;
 
   // Routing from about author page
-  const url = "http://localhost:5000/books/book/id?_id=" + props.location.id;
+  const url = "http://localhost:5000/books/book/id?_id=" + props.bookID;
 
   const [book, setBook] = useState([]);
   const [is404, setIs404] = useState(false);
