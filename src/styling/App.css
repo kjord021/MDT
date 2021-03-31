@@ -116,11 +116,9 @@ a:visited {
 }
 /* cart page styling */
 .card.cart-card {
-  border-radius: 15px 50px;
   border-color: black;
 }
 .col-md-2.cart-card {
-  border-radius: 15px 50px;
 }
 .cart-img {
   display: flex;
@@ -137,12 +135,11 @@ a:visited {
 }
 
 .cart-card-img {
-  display: block;
-  max-width: 250px;
-  max-height: 250px;
+  display: flex;
+  max-width: 300px;
+  max-height: 300px;
   width: auto;
   height: auto;
-  border-radius: 15px 50px;
 }
 .cart-card-img:hover {
   transform: scaleX(-1);
@@ -154,7 +151,6 @@ a:visited {
 }
 
 .cart-card-body {
-  border-radius: 15px 50px;
   border: 15px;
   border-color: red;
   text-align: left;
