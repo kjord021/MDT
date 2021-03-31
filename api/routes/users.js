@@ -415,12 +415,12 @@ router.delete("/cart/delete", (req, res) => {
 
 /*DELETE item from save cart*/
 router.delete("/save/delete", (req, res) => {
-  const cartItemID = req.body.cartID;
+  const bookID = req.body.bookID;
   const userID = req.body.userID;
 
   User.updateOne(
     {_id: userID},
-    {$pull: {"saveForLater": {_id:cartItemID}}}, (err) => {
+    {$pull: {"saveForLater": {book:bookID}}}, (err) => {
       if (err){
         console.log(err);
       } else {

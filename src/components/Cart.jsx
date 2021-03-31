@@ -75,7 +75,7 @@ const getSaveData = () => {
 
   var saveCards = saveBooks.map((book) => 
     <div class="col-sm-6">
-    <SaveLater book={book}/>
+    <SaveLater book={book} userID={props.userID}/>
     </div>
   )
 
@@ -86,7 +86,7 @@ const getSaveData = () => {
       <div>
         <div class="container">
           <h1>Shopping Cart </h1>
-          <button type="submit" class="btn btn-dark" onClick={() => {getUserCart(); getBookData();}}>
+          <button type="submit" class="btn btn-dark" onClick={() => {getUserCart(); getBookData(); getSave(); getSaveData();}}>
               Refresh
           </button>
           <hr/>

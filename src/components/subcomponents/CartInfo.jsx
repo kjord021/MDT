@@ -14,7 +14,7 @@ function CartInfo(props) {
             props.setLoad(false);
         })
         .catch((error) => console.log(error))
-    }
+    };
     
     function updateQ(cart, ID){
         axios.patch("http://localhost:5000/users/cart/update", {
@@ -27,7 +27,19 @@ function CartInfo(props) {
             props.setLoad(false);
         })
         .catch((error) => console.log(error))
-    }
+    };
+
+    function save(book, ID) {
+        axios.put("http://localhost:5000/users/save/add" , {
+            userID:ID,
+            book:book
+        })
+        .then((response) => {
+            console.log(response)
+            props.setLoad(false);
+        })
+        .catch((error) => console.log(error))
+    };
 
   return (
       <div class="card cart-card">
@@ -56,7 +68,7 @@ function CartInfo(props) {
                         onClick={() => deleteBook(props.cartItem, props.userID)}>Delete
                       </button>
                       <div>
-                          <button id="cart-button" class="btn btn-primary">Save for later</button>
+                          <button id="cart-button" class="btn btn-primary" onClick={() => save(props.book._id, props.userID)}>Save for later</button>
                       </div>
                   </div>
               </div>
