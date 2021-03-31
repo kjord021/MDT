@@ -19,7 +19,7 @@ function Home(){
           }
         );
 
-    var cards = books.map((book) => 
+    var cards = books.map((book) =>
       <div class = "col-sm-6">
         <CardUI
         title = {book.title}
@@ -29,6 +29,16 @@ function Home(){
       </div>
     )
 
+/*
+    books.filter((book) => {
+    if (book.date > 5) //etc etc
+});
+books.sort((book1, book2) => {
+    if (book1.date > book2.date) {
+return true;
+...
+}
+*/
 
 
 return (

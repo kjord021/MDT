@@ -13,8 +13,14 @@ function CardUI(props) {
             <p className="card-text text-secondary">
             {props.description}
             </p>
-            <a href='#' className = 'btn btn-primary'>Add to Cart</a>
+
+            <a href='http://localhost:3000/Cart' className = 'btn btn-primary'>Add to Cart</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href='http://localhost:3000/bookDetails' className = 'btn btn-primary'>Book Details</a>
+
             </div>
+
+
           </div>
     </>
   );
