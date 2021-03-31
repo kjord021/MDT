@@ -1,8 +1,57 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useHistory,
+  withRouter,
+} from "react-router-dom";
+import axios from "axios";
 
 function BookInfo(props) {
+  const [redirect, setRedirect] = useState(false);
   const [enlarge, setEnlarge] = useState(false);
+  console.log(props.book);
+
+  // Testing function (testing user ID)
+  /*
+  function addToCart() {
+    axios
+      .put("http://localhost:5000/users/cart/add", {
+        book: props.book._id,
+        userID: "605cf31172ad7e5358eea6ca",
+      })
+      .then((response) => {
+        console.log(response);
+        alert(props.book.title + " has been added to your shopping cart!");
+      })
+      .catch((error) => console.log(error));
+  }
+  */
+
+  function addToCart() {
+    if (!props.loggedIn) {
+      setRedirect(true);
+    } else {
+      axios
+        .put("http://localhost:5000/users/cart/add", {
+          book: props.book._id,
+          userID: props.userID,
+        })
+        .then((response) => {
+          alert(props.book.title + " has been added to your shopping cart!");
+          console.log(response);
+        })
+        .catch((error) => console.log(error));
+    }
+  }
+
+  if (redirect) {
+    return <Redirect to="/Login" />;
+  }
+
   return (
     <div class="row">
       <div class="col-lg-1"></div>
@@ -51,7 +100,12 @@ function BookInfo(props) {
                   </span>
                   ${props.book.price?.$numberDecimal}
                 </p>
-                <button id="submitbutton" type="submit" class="btn btn-success">
+                <button
+                  onClick={() => addToCart()}
+                  id="submitbutton"
+                  type="submit"
+                  class="btn btn-success"
+                >
                   Add to cart
                 </button>
                 <Link
@@ -96,4 +150,4 @@ const LargeCover = ({ img, setEnlarge }) => {
   );
 };
 
-export default BookInfo;
+export default withRouter(BookInfo);
