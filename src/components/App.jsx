@@ -202,10 +202,14 @@ function App() {
             />
           </Route>
           <Route path="/BookDetails">
-            <BookDetails isLoggedIn={isLoggedIn} userID={userID} bookID={bookID} />
+            <BookDetails
+              isLoggedIn={isLoggedIn}
+              userID={userID}
+              bookID={bookID}
+            />
           </Route>
           <Route path="/Author/">
-            <AboutAuthor />
+            <AboutAuthor setBookID={setBookID} />
           </Route>
           <Route path="/Cart">
             <Cart
@@ -229,17 +233,13 @@ function App() {
             />
           </Route>
           <Route path="/Dashboard">
-            <Home
-            setBookID ={setBookID}
-            />
+            <Home setBookID={setBookID} />
           </Route>
           <Route path="/404">
             <ErrorPage />
           </Route>
           <Route path="/">
-            <Home
-            setBookID ={setBookID}
-            />
+            <Home setBookID={setBookID} />
           </Route>
         </Switch>
       </div>
