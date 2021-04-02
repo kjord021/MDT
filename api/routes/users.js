@@ -187,6 +187,23 @@ router.put('/cart/add', function(req, res) {
   )
 });
 
+/*PUT new book to save for later*/
+router.put('/save/add', function(req, res) {
+  const book = req.body.book; 
+  const userID = req.body.userID; 
+
+  User.updateOne(
+    {_id: userID}, //finds user by ID
+    {$push: {"saveForLater": [{"book": book}]}}, (err) => {
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Book saved for later');
+      }
+    }
+  )
+});
+
 /*PUT a new credit card to account*/
 router.put('/add/card', function(req, res) {
   var userName = req.body.userName;
@@ -395,6 +412,23 @@ router.delete("/cart/delete", (req, res) => {
         console.log(err);
       } else {
         res.send('Book removed from cart');
+      }
+    }
+  )
+});
+
+/*DELETE item from save cart*/
+router.delete("/save/delete", (req, res) => {
+  const bookID = req.body.bookID;
+  const userID = req.body.userID;
+
+  User.updateOne(
+    {_id: userID},
+    {$pull: {"saveForLater": {book:bookID}}}, (err) => {
+      if (err){
+        console.log(err);
+      } else {
+        res.send('Book removed from save cart');
       }
     }
   )
