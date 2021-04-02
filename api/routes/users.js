@@ -4,6 +4,7 @@ var mongoose = require("mongoose");
 const app = require('../app');
 var connect = require('connect');
 const { useParams } = require('react-router-dom');
+var md5 = require('md5');
 var eApp = connect();
 var router = express.Router();
 
@@ -90,8 +91,10 @@ router.get('/user', function(req, res, next) {
 /* POST A single user to login. */
 router.post('/login', function(req, res){
    //parse data from html form
-   const password = req.body.password;
+   const password = md5(req.body.password);
    const userName = req.body.userName;
+
+   console.log(password);
  
    //if finds matching user name
    User.findOne({userName: userName}, function(err, user){
@@ -118,7 +121,8 @@ router.post('/register', function(req, res){
   const userName = req.body.userName;
   const email = req.body.emailAdd;
   const fullName = req.body.fullName;
-  const password = req.body.password;
+  const password = md5(req.body.password);
+
 
   //check to see if UN or email exist
   User.findOne({userName: userName}, function(err, user){
@@ -286,7 +290,7 @@ router.put('/update', function(req, res){
   const newUserName = req.body.newUserName;
   const homeAddress = req.body.homeAddress;
   const email = req.body.emailAdd;
-  const password = req.body.password;
+  const password = md5(req.body.password);
   const fullName = req.body.fullName;
   const nickname = req.body.nickname;
 

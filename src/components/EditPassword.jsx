@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Redirect} from "react-router-dom";
 import axios from "axios";
+import md5 from "md5"
 
 function EditPassword(props){
 
@@ -14,7 +15,7 @@ function EditPassword(props){
     function onFormSubmit(e){
         e.preventDefault();
 
-        if (oldPass === props.password){
+        if (md5(oldPass) === props.password){
             if (password.length > 5){
                 if (password === confPass){
                         axios

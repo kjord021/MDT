@@ -27,11 +27,11 @@ const book = {
 
 function BookDetails(props) {
   // Testing
-  // const title = "Harry Potter and the Chamber of Secrets";
-  // const url = "http://localhost:5000/books/book?title=" + title;
+  const title = "Harry Potter and the Chamber of Secrets";
+  const url = "http://localhost:5000/books/book?title=" + title;
 
   // Routing from about author page
-  const url = "http://localhost:5000/books/book/id?_id=" + props.location.id;
+  //const url = "http://localhost:5000/books/book/id?_id=" + props.location.id;
 
   const [book, setBook] = useState([]);
   const [is404, setIs404] = useState(false);
