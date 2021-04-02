@@ -21,9 +21,10 @@ function CardUI(props) {
             <p className="card-text text-secondary">
             {props.description}
             </p>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <Link onClick={()=>props.setBookID(props.bookID)} to="/BookDetails" as="a" className="btn btn-primary">Book Details</Link>
-            &nbsp;&nbsp;&nbsp;
-            <Link to="/Cart" as="a" className="btn btn-primary">Add to Cart</Link>
 
 
               </div>
