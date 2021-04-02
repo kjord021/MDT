@@ -119,9 +119,11 @@ function BookInfo(props) {
                     About Author
                   </button>
                 </Link>
-                <button id="detailbutton" type="submit" class="btn btn-dark">
-                  Back to results
-                </button>
+                <Link to={{ pathname: "/" }}>
+                  <button id="detailbutton" type="submit" class="btn btn-dark">
+                    Back to results
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

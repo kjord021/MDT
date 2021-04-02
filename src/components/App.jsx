@@ -39,7 +39,7 @@ function App() {
   const [creditCards, setCreditCards] = useState([]);
   const [shoppingCart, setShoppingCart] = useState([]);
   const [shippingAddresses, setShippingAddresses] = useState([]);
-
+  const [bookID, setBookID] = useState("");
   // //Call the useEffect hook
   // useEffect(() =>{
   //   //Create an axios request to our api at /testAPI route
@@ -202,10 +202,14 @@ function App() {
             />
           </Route>
           <Route path="/BookDetails">
-            <BookDetails isLoggedIn={isLoggedIn} userID={userID} />
+            <BookDetails
+              isLoggedIn={isLoggedIn}
+              userID={userID}
+              bookID={bookID}
+            />
           </Route>
           <Route path="/Author/">
-            <AboutAuthor />
+            <AboutAuthor setBookID={setBookID} />
           </Route>
           <Route path="/Cart">
             <Cart
@@ -229,13 +233,13 @@ function App() {
             />
           </Route>
           <Route path="/Dashboard">
-            <Home />
+            <Home setBookID={setBookID} />
           </Route>
           <Route path="/404">
             <ErrorPage />
           </Route>
           <Route path="/">
-            <Home />
+            <Home setBookID={setBookID} />
           </Route>
         </Switch>
       </div>

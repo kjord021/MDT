@@ -1,6 +1,14 @@
 import React from 'react';
 import style from './card-style.css'
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
+
 function CardUI(props) {
   return(
     <>
@@ -13,9 +21,18 @@ function CardUI(props) {
             <p className="card-text text-secondary">
             {props.description}
             </p>
-            <a href='#' className = 'btn btn-primary'>Add to Cart</a>
-            </div>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <Link onClick={()=>props.setBookID(props.bookID)} to="/BookDetails" as="a" className="btn btn-primary">Book Details</Link>
+
+
+              </div>
+
+
+
           </div>
+
     </>
   );
 }

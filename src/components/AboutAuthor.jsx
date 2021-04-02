@@ -54,10 +54,9 @@ function AboutAuthor(props) {
                   return (
                     <div class="col-sm-6 col-lg-4">
                       <Link
-                        to={{
-                          pathname: "/bookDetails",
-                          id: _id,
-                        }}
+                        onClick={() => props.setBookID(_id)}
+                        to="/BookDetails"
+                        as="a"
                         style={{ textDecoration: "inherit", color: "inherit" }}
                       >
                         <div class="card mb-3">

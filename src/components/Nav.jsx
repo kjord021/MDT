@@ -12,37 +12,37 @@ function Nav(props){
 
     if (props.isLoggedIn()){
         return (
-            <nav class="navbar navbar-expand-lg navbar-light bg-dark" id="nav">
-                    <ul class="navbar-nav mr-auto" id="nav">
-                        <li class="nav-item active" id="nav">
-                            <a class="nav-link" id="nav"><Link to="/">Home</Link></a>
+            <nav className="navbar navbar-expand-lg navbar-light bg-dark" id="nav">
+                    <ul className="navbar-nav mr-auto" id="nav">
+                        <li className="nav-item active" id="nav">
+                            <Link to="/" className="nav-link" id="nav">Home</Link>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link"><Link to="/MyAccount">My account</Link></a>
+                        <li className="nav-item active">
+                            <Link to="/MyAccount" className="nav-link" id="nav">My account</Link>
                         </li>
                     </ul>
                     <div>
-                        <Link to="/Cart"><img src={logo} class="cart-img"/></Link>
+                        <Link to="/Cart"><img src={logo} className="cart-img"/></Link>
                     </div>
             </nav>
         );
     }
     else {
         return(
-            <nav class="navbar navbar-expand-lg navbar-light bg-dark" id="nav">
-                <ul class="navbar-nav mr-auto" id="nav">
-                    <li class="nav-item active" id="nav">
-                        <a class="nav-link" id="nav"><Link to="/">Home</Link></a>
+            <nav className="navbar navbar-expand-lg navbar-light bg-dark" id="nav">
+                <ul className="navbar-nav mr-auto" id="nav">
+                    <li className="nav-item active" id="nav">
+                        <Link to="/" className="nav-link" id="nav">Home</Link>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link"><Link to="/Login">Login</Link></a>
+                    <li className="nav-item active">
+                        <Link to="/Login" className="nav-link" id="nav">Login</Link>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link"><Link to="/Register">Register</Link></a>
+                    <li className="nav-item active">
+                        <Link to="/Register" className="nav-link" id="nav">Register</Link>
                     </li>
                 </ul>
                 <div>
-                        <Link to="/Cart"><img src={logo} class="cart-img"/></Link>
+                        <Link to="/Cart"><img src={logo} className="cart-img"/></Link>
                 </div>
             </nav>
       );
