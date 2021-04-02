@@ -307,9 +307,13 @@ router.put('/update', function(req, res){
   const newUserName = req.body.newUserName;
   const homeAddress = req.body.homeAddress;
   const email = req.body.emailAdd;
-  const password = md5(req.body.password);
+  var password = req.body.password;
   const fullName = req.body.fullName;
   const nickname = req.body.nickname;
+
+  if (password != null){
+    password = md5(password);
+  }
 
   console.log(req.body.homeAddress);
 
