@@ -12,6 +12,11 @@ import {
 
 function Home(props){
     const [books, setBooks] = useState([]);
+    const [request, setRequested] = useState(false);
+    const [dBooks, setDBooks] = useState([]);
+    const [selectedOption, setSelectedOption] = useState("Author");
+    if(!request){
+      setRequested(true);
         axios
           .get("http://localhost:5000/books/", {
           })
@@ -19,6 +24,8 @@ function Home(props){
           (response) => {
 
             setBooks(response.data);
+            setDBooks(response.data);
+
 
           },
 
@@ -26,48 +33,164 @@ function Home(props){
             console.log(error);
           }
         );
+      }
 
-    var cards = books.map((book) =>
-      <div class = "col-sm-6">
 
-        <CardUI
-        title = {book.title}
-        imgsrc = {book.cover}
-        description = {book.description}
-        setBookID = {props.setBookID}
-        bookID = {book._id}
-        />
-      </div>
-    )
 
-/*
-    books.filter((book) => {
-    if (book.date > 5) //etc etc
+  var onValueChange = function onValueChange(event){
+    setSelectedOption(event.target.value);
+  }
+
+  var formSubmit = function formSubmit(event) {
+    event.preventDefault();
+    if(selectedOption === "Title"){
+
+      setDBooks([].concat(books).sort( (a,b)=>{
+        return a.title.localeCompare(b.title);
+
+      }));
+
+    }
+    if(selectedOption === "Author"){
+
+      setDBooks([].concat(books).sort( (a,b)=>{
+        return a.author.localeCompare(b.author);
+
+      }));
+
+    }
+    if(selectedOption === "Genre"){
+
+      setDBooks([].concat(books).sort( (a,b)=>{
+        return a.genre.localeCompare(b.genre);
+
+      }));
+
+    }
+    if(selectedOption === "Price"){
+
+      setDBooks([].concat(books).sort( (a,b)=>{
+        return b.price.$numberDecimal.localeCompare(a.price.$numberDecimal);
+
+      }));
+
+
+
+    }
+    if(selectedOption === "Book Rating"){
+
+      setDBooks([].concat(books).sort( (a,b)=>{
+        return b.rating - a.rating;
+
+      }));
+
+
+
+    }
+    /*
+    tempBooks.filter((book) => {
+   if (book.date > 5)
 });
-books.sort((book1, book2) => {
-    if (book1.date > book2.date) {
+var books.sort((book1, book2) => {
+   if (book1.date > book2.date) {
 return true;
 ...
 }
 */
+  }
 
 
 return (
   <>
-  <div class="container">
+  <form onSubmit={formSubmit}>
+      <div className="radio">
+    <label>
+      <input
+        type="radio"
+        value="Title"
+        checked={selectedOption === "Title"}
+        onChange={onValueChange}
+      />
+      Title
+    </label>
+  </div>
+
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="Author"
+              checked={selectedOption === "Author"}
+              onChange={onValueChange}
+            />
+            Author
+          </label>
+        </div>
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="Genre"
+              checked={selectedOption === "Genre"}
+              onChange={onValueChange}
+            />
+            Genre
+          </label>
+        </div>
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="Price"
+              checked={selectedOption === "Price"}
+              onChange={onValueChange}
+            />
+            Price
+          </label>
+        </div>
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="Book Rating"
+              checked={selectedOption === "Book Rating"}
+              onChange={onValueChange}
+            />
+            Book Rating
+          </label>
+        </div>
+        <div>
+          Selected option is : {selectedOption}
+        </div>
+        <button className="btn btn-default" type="submit">
+          Submit
+        </button>
+      </form>
+
+  <div className = "container">
       <br/>
-      <div class = "row">
-        <div class = "col-sm-4">
+      <div className = "row">
+        <div className = "col-sm-4">
         </div>
-        <div class = "col-sm-4">
-        <input />
+        <div className = "col-sm-4">
         </div>
-        <div class = "col-sm-4">
+        <div className = "col-sm-4">
         </div>
       </div>
       <br />
-      <div class = "row">
-          {cards}
+      <div className = "row">
+            {dBooks.map((book) =>
+            <div className = "col-sm-6" key = {book._id}>
+
+              <CardUI
+              title = {book.title}
+              imgsrc = {book.cover}
+              description = {book.description}
+              setBookID = {props.setBookID}
+              bookID = {book._id}
+              />
+            </div>
+          )}
       </div>
    </div>
   </>

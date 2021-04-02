@@ -21,9 +21,9 @@ function CardUI(props) {
             <p className="card-text text-secondary">
             {props.description}
             </p>
-            <Link onClick={()=>props.setBookID(props.bookID)} to="/BookDetails" as="a" class="btn btn-primary">Book Details</Link>
+            <Link onClick={()=>props.setBookID(props.bookID)} to="/BookDetails" as="a" className="btn btn-primary">Book Details</Link>
             &nbsp;&nbsp;&nbsp;
-            <Link to="/Cart" as="a" class="btn btn-primary">Cart</Link>
+            <Link to="/Cart" as="a" className="btn btn-primary">Add to Cart</Link>
 
 
               </div>
