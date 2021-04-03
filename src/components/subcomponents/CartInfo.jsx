@@ -29,7 +29,7 @@ function CartInfo(props) {
         .catch((error) => console.log(error))
     };
 
-    function save(book, ID) {
+    function save(book, ID, cartID) {
         axios.put("http://localhost:5000/users/save/add" , {
             userID:ID,
             book:book
@@ -39,6 +39,8 @@ function CartInfo(props) {
             props.setLoad(false);
         })
         .catch((error) => console.log(error))
+
+        deleteBook(cartID, ID)
     };
 
   return (
@@ -68,7 +70,7 @@ function CartInfo(props) {
                         onClick={() => deleteBook(props.cartItem, props.userID)}>Delete
                       </button>
                       <div>
-                          <button id="cart-button" class="btn btn-primary" onClick={() => save(props.book._id, props.userID)}>Save for later</button>
+                          <button id="cart-button" class="btn btn-primary" onClick={() => save(props.book._id, props.userID, props.cartItem)}>Save for later</button>
                       </div>
                   </div>
               </div>

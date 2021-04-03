@@ -18,13 +18,14 @@ function SaveLater(props) {
     function addCart(book, ID) {
         axios.put("http://localhost:5000/users/cart/add" , {
             userID:ID,
-            book:book
+            book:book._id
         })
         .then((response) => {
             console.log(response)
             props.setLoad(false);
         })
         .catch((error) => console.log(error))
+        deleteBook(book, ID)
     };
 
     return (
@@ -36,7 +37,7 @@ function SaveLater(props) {
                     <div class="row">
                         <button type="submit" class="btn btn-danger" onClick={() => {deleteBook(props.book, props.userID)}}>Delete</button>
                         &nbsp;
-                        <button type="submit" class="btn btn-success" onClick={() => {addCart(props.book._id, props.userID)}}>Move to Cart</button>
+                        <button type="submit" class="btn btn-success" onClick={() => {addCart(props.book, props.userID)}}>Move to Cart</button>
                     </div>
                 </div>
         </div>

@@ -44,7 +44,10 @@ function BookInfo(props) {
           alert(props.book.title + " has been added to your shopping cart!");
           console.log(response);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          alert(props.book.title + " is already in your cart!");
+          console.log(error)
+        });
     }
   }
 

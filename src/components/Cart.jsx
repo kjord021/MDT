@@ -75,7 +75,7 @@ const getSaveData = () => {
 
   var saveCards = saveBooks.map((book) => 
     <div class="col-sm-6">
-    <SaveLater book={book} userID={props.userID}/>
+    <SaveLater book={book} userID={props.userID} setLoad={setLoad}/>
     </div>
   )
 
