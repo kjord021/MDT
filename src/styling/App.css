@@ -118,7 +118,8 @@ a:visited {
 .card.cart-card {
   border-color: black;
 }
-.col-md-2.cart-card {
+.card.save-card {
+  width: 20rem;
 }
 .cart-img {
   display: flex;

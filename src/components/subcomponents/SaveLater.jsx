@@ -29,8 +29,8 @@ function SaveLater(props) {
     };
 
     return (
-        <div class="card" style={{width: '2 rem' }}>
-            <img class="card-img-top" src={props.book.cover} alt="Card image cap"/>
+        <div class="card save-card">
+            <img class="card-img-top" src={props.book.cover} />
                 <div class="card-body">
                     <h5 class="card-title">{props.book.title}</h5>
                     <p class="card-text">{props.book.author}</p>

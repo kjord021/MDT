@@ -98,7 +98,7 @@ const getSaveData = () => {
                 }
               })
               totalCost = (parseFloat(book.price?.$numberDecimal) * parseFloat(cartItem.quantity)) + totalCost 
-              return <div key={i}>{<CartInfo book={book} cartItem={cartItem} userID={props.userID} setLoad={setLoad}/>}<br/></div>
+              return <div class="p-cart-card" key={i}>{<CartInfo book={book} cartItem={cartItem} userID={props.userID} setLoad={setLoad}/>}<br/></div>
             }
           })}
         </div>
