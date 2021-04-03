@@ -175,9 +175,15 @@ router.put('/cart/add', function(req, res) {
   if (quantity == null) {
     quantity = 1
   }
-
-  User.findOne({book:book}, (err, book)=> {
-    if (book) {
+  User.findOne({_id: userID }, (err, bookF)=> {
+    var found = false;
+    for(var i=0; i<bookF.cart.length; i++) {
+      if (bookF.cart[i].book == book) {
+        found = true;
+        break;
+      }
+    }
+    if (found) {
       res.status(404).send('That book is already in your cart.');
     }
     else {
@@ -187,7 +193,7 @@ router.put('/cart/add', function(req, res) {
           if (err){
             console.log(err);
           } else {
-            res.send('Book added to cart');
+            res.status(200).send('Book added to cart');
           }
         }
       )
