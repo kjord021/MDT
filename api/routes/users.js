@@ -175,17 +175,30 @@ router.put('/cart/add', function(req, res) {
   if (quantity == null) {
     quantity = 1
   }
-  User.updateOne(
-    {_id: userID}, //finds user by ID
-    {$push: {"cart": [{"book": book, "quantity": quantity}]}}, (err) => { //add data in to existing cart
-      if (err){
-        console.log(err);
-      } else {
-        res.send('Book added to cart');
+  User.findOne({_id: userID }, (err, bookF)=> {
+    var found = false;
+    for(var i=0; i<bookF.cart.length; i++) {
+      if (bookF.cart[i].book == book) {
+        found = true;
+        break;
       }
     }
-  )
-});
+    if (found) {
+      res.status(404).send('That book is already in your cart.');
+    }
+    else {
+      User.updateOne(
+        {_id: userID}, //finds user by ID
+        {$push: {"cart": [{"book": book, "quantity": quantity}]}}, (err) => { //add data in to existing cart
+          if (err){
+            console.log(err);
+          } else {
+            res.status(200).send('Book added to cart');
+          }
+        }
+      )
+    }
+  })});
 
 /*PUT new book to save for later*/
 router.put('/save/add', function(req, res) {
