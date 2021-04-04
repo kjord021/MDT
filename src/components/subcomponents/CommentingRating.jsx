@@ -10,8 +10,8 @@ function CommentingRating(props) {
   const [showNickname, setShowNickname] = useState(0);
   const [isAnonymous, setAnonymous] = useState(0);
   const id = props.book._id;
-  const username = props.login.userName || "Missing";
-  const nickname = props.login.nickName || "Missing";
+  const username = props.props.userName || "Missing";
+  const nickname = props.props.nickName || "Missing";
   const reviews = props.book.reviews || [];
 
   function handleAnonymous(x, y) {

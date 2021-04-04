@@ -37,7 +37,7 @@ function BookDetails(props) {
         loggedIn={props.isLoggedIn()}
         userID={props.userID}
       />
-      <CommentingRating book={book} login={props} />
+      <CommentingRating book={book} props={props} />
     </div>
   );
 }
