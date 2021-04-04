@@ -49,7 +49,8 @@ const userSchema = {
   saveForLater: [{
     book: Object,
     quantity: Number
-  }]
+  }],
+  purchased: []
 };
 
 //bind schema to object
