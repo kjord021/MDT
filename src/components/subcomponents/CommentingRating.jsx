@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import StarRatings from "react-star-ratings";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 function CommentingRating(props) {
   const [createReview, setCreateReview] = useState(false);
@@ -9,10 +10,13 @@ function CommentingRating(props) {
   const [rating, setRating] = useState(0);
   const [showNickname, setShowNickname] = useState(0);
   const [isAnonymous, setAnonymous] = useState(0);
+  const [bought, setBought] = useState(false);
   const id = props.book._id;
   const username = props.props.userName || "Missing";
   const nickname = props.props.nickName || "Missing";
   const reviews = props.book.reviews || [];
+
+  purchased(id);
 
   function handleAnonymous(x, y) {
     if (y == 0) return x;
@@ -79,6 +83,16 @@ function CommentingRating(props) {
     return Math.round((sum / reviews.length) * 100) / 100 || 0;
   }
 
+  function purchased(bookID) {
+    if (!props.props.isLoggedIn()) {
+      return false;
+    }
+    axios
+      .get("http://localhost:5000/users/purchased?userName=" + username, {})
+      .then((response) => setBought(response.data.purchased.includes(bookID)));
+    return bought;
+  }
+
   function onFormSubmit(e) {
     axios.post(
       `http://localhost:5000/books/addReview`,
@@ -96,6 +110,7 @@ function CommentingRating(props) {
         },
       }
     );
+    props.setReviewFinished(true);
   }
 
   if (createReview) {
@@ -233,7 +248,7 @@ function CommentingRating(props) {
                 <br />
                 <br />
                 <button
-                  onClick={() => setCreateReview(true)}
+                  onClick={() => (bought ? setCreateReview(true) : null)}
                   class="btn btn-outline-secondary btn-lg"
                 >
                   Create Customer Review

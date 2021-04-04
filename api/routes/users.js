@@ -469,4 +469,25 @@ router.patch("/cart/update", (req, res) => {
   )
 });
 
+/* Check if a user has purchased a particular book. */
+router.get('/purchased', function(req, res, next) {
+
+  var userName = req.query.userName;
+  
+  User.findOne({userName: userName}, function(err, result){
+    if (err) {
+      //console.log(err);
+      res.send("Error");
+    }
+    else if (result) {
+      res.json(result);
+    }
+    else {
+      res.send("not purchased");
+    }
+
+  });
+
+});
+
 module.exports = router;
