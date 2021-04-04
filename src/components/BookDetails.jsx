@@ -16,6 +16,7 @@ function BookDetails(props) {
 
   const [book, setBook] = useState([]);
   const [is404, setIs404] = useState(false);
+  const [reviewFinished, setReviewFinished] = useState(false);
 
   useEffect(() => {
     axios
@@ -31,13 +32,18 @@ function BookDetails(props) {
 
   return (
     <div class="container" id="detailscontainer">
+      {reviewFinished ? <Redirect to="/" /> : null}
       {is404 ? <Redirect to="/404" /> : null}
       <BookInfo
         book={book}
         loggedIn={props.isLoggedIn()}
         userID={props.userID}
       />
-      <CommentingRating book={book} login={props} />
+      <CommentingRating
+        book={book}
+        props={props}
+        setReviewFinished={setReviewFinished}
+      />
     </div>
   );
 }

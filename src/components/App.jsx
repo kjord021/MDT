@@ -206,6 +206,8 @@ function App() {
               isLoggedIn={isLoggedIn}
               userID={userID}
               bookID={bookID}
+              userName={userName}
+              nickName={nickName}
             />
           </Route>
           <Route path="/Author/">
