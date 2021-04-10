@@ -10,7 +10,7 @@ function SaveLater(props) {
         }})
         .then((response) => {
             console.log(response);
-            props.setLoad(false);
+            props.setRender(props.render + 1);
         })
         .catch((error) => console.log(error))
     };
@@ -22,10 +22,9 @@ function SaveLater(props) {
         })
         .then((response) => {
             console.log(response)
-            props.setLoad(false);
+            deleteBook(book, ID)
         })
         .catch((error) => console.log(error))
-        deleteBook(book, ID)
     };
 
     return (
