@@ -4,115 +4,66 @@ import CartInfo from "./subcomponents/CartInfo";
 import SaveLater from "./subcomponents/SaveLater"
 import axios from "axios";
 
+
 function Cart(props) {
-  var totalCost = 0;
-  var cartItem = {};
+    var totalCost = 0;
+    const [isLoading, setLoading] = useState(true);
+    const [cart, setCart] = useState([]);
+    const [save, setSave] = useState([]);
+    const [render, setRender] = useState(0);
 
-  const [books, setBooks] = useState([]); 
-  const [cart, setCart] = useState([]);
-  const [save, setSave] = useState([]);
-  const [saveBooks, setSaveBooks] = useState([]);
-  const [load, setLoad] = useState(false)
- 
-
-  //console.log("books",books) //for debugging
-  //console.log("cart",cart) //for debugging
-
-  useEffect(() => { //builds cart data
-    getUserCart();
-    getBookData();
-    setLoad(true)
-  }, [load, cart.length]);
-
-  useEffect(() => { //builds save for later data
-    getSave();
-    getSaveData();
-    setLoad(true)
-  }, [load, save.length])
-
-
-  const getUserCart = () => {
-    axios
-    .get("http://localhost:5000/users/user/", {params: {userName:props.userName}})
-    .then((response) => {
-      const data = response.data.cart
-      setCart(data)
-    })
-    .catch((error) => console.log(error));
-  };
-
-  const getBookData = () => {
-    setBooks([])
-    cart.map((cart, i) => {
-    axios
-    .get("http://localhost:5000/books/book/id", {params: {_id:cart.book}})
-    .then((response) => {
-      setBooks(books => [...books, response.data]) 
-    })
-    .catch((error) => console.log(error));
-})};
-
-const getSave = () => {
-  axios
-  .get("http://localhost:5000/users/user/", {params: {userName:props.userName}})
-  .then((response) => {
-    const data = response.data.saveForLater
-    setSave(data)
-  })
-  .catch((error) => console.log(error));
-}
-
-const getSaveData = () => {
-  setSaveBooks([])
-  save.map((cart, i) => {
-  axios
-  .get("http://localhost:5000/books/book/id", {params: {_id:cart.book}})
-  .then((response) => {
-    setSaveBooks(saveBooks => [...saveBooks, response.data]) 
-  })
-  .catch((error) => console.log(error));
-})};
-
-  var saveCards = saveBooks.map((book) => 
-    <div class="col-sm-6">
-    <SaveLater book={book} userID={props.userID} setLoad={setLoad}/>
-    </div>
-  )
+    useEffect(() => {
+        axios.get("http://localhost:5000/users/user/", {params: {userName:props.userName}})
+        .then((response) => {
+            setCart([])
+            setSave([])
+            response.data.cart.map((item, i) => {
+                axios.get("http://localhost:5000/books/book/id", {params: {_id:item.book}})
+                .then((response) => {
+                    setCart(cart => [...cart, {_id:item._id, quantity:item.quantity, book:response.data}]);
+                })
+            });
+            response.data.saveForLater.map((item, i) => {
+                axios.get("http://localhost:5000/books/book/id", {params: {_id:item.book}})
+                .then((response) => {
+                    setSave(cart => [...cart, {_id:item._id, quantity:item.quantity, book:response.data}])
+                })
+            });
+            setLoading(false)
+        });
+    },[render]);
 
     if (!props.isLoggedIn()) {
         return (<Redirect to='/Login' />);
     }
+
+    if (isLoading) {
+        return <div>Loading...</div>
+      }
+    cart.map(item => totalCost = totalCost + parseFloat(item.book.price?.$numberDecimal) * parseFloat(item.quantity))
     return (
-      <div>
-        <div class="container">
-          <h1>Shopping Cart </h1>
-          <button type="submit" class="btn btn-dark" onClick={() => {getUserCart(); getBookData(); getSave(); getSaveData();}}>
-              Refresh
-          </button>
-          <hr/>
-          {books.map((book, i) => {
-            if (cart[i] != undefined) {
-              cart.forEach((item) => {
-                if (item.book == book._id) {
-                  cartItem = item
-                }
-              })
-              totalCost = (parseFloat(book.price?.$numberDecimal) * parseFloat(cartItem.quantity)) + totalCost 
-              return <div class="p-cart-card" key={i}>{<CartInfo book={book} cartItem={cartItem} userID={props.userID} setLoad={setLoad}/>}<br/></div>
-            }
-          })}
-        </div>
-        <h4 id="total">Subtotal: ${totalCost.toFixed(2)}</h4>
-        <hr/>
-        <div class="container">
-          <h1>Save for Later </h1>
-          <div class="row">
-            {saveCards}
+        <div>
+          <div class="container">
+            <h1>Shopping Cart </h1>
+            <button type="submit" class="btn btn-dark" onClick={() => {setRender(render + 1)}}>
+                Refresh
+            </button>
+            <hr/>
+            <div class="p-cart-card" >
+                {cart.map(item => <div key={item._id}><CartInfo book={item.book} cartItem={item} userID={props.userID} setRender={setRender} render={render}/><br/></div>)}
+            </div>
           </div>
-          <br/>
+          <h4 id="total">Subtotal: ${totalCost.toFixed(2)}</h4>
+          <hr/>
+          <div class="container">
+            <h1>Save for Later </h1>
+            <div class="row">
+            {save.map(item => <div class="col-sm-6" key={item._id}><SaveLater book={item.book} userID={props.userID} setRender={setRender} render={render}/><br/></div>)}
+            </div>
+            <br/>
+          </div>
         </div>
-      </div>
-    );
-  }
+      );
+}
 
 export default Cart;

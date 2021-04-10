@@ -11,7 +11,7 @@ function CartInfo(props) {
         }})
         .then((response) => {
             console.log(response);
-            props.setLoad(false);
+            props.setRender(props.render + 1);
         })
         .catch((error) => console.log(error))
     };
@@ -24,7 +24,7 @@ function CartInfo(props) {
         })
         .then((response) => {
             console.log(response)
-            props.setLoad(false);
+            props.setRender(props.render + 1);
         })
         .catch((error) => console.log(error))
     };
@@ -36,11 +36,9 @@ function CartInfo(props) {
         })
         .then((response) => {
             console.log(response)
-            props.setLoad(false);
+            deleteBook(cartID, ID)
         })
         .catch((error) => console.log(error))
-
-        deleteBook(cartID, ID)
     };
 
   return (
@@ -62,7 +60,7 @@ function CartInfo(props) {
                             </div>
                           </div>
                           <br/>
-                          <p>Cost: ${props.book.price?.$numberDecimal}</p>
+                          <p>Price: ${props.book.price?.$numberDecimal}</p>
                       </div>
                   </div>
                   <div class="col-md-3">
