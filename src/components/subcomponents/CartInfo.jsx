@@ -59,12 +59,12 @@ function CartInfo(props) {
                                 <button type="button" onClick={() => updateQ(props.cartItem, props.userID)}><img src={refresh} class="cart-refresh-img"/></button>
                             </div>
                           </div>
-                          <br/>
-                          <p>Price: ${props.book.price?.$numberDecimal}</p>
+                          <br/><br/>
+                          <p class="price-style">Price: ${props.book.price?.$numberDecimal}</p>
                       </div>
                   </div>
                   <div class="col-md-3">
-                      <button id="cart-button" type="submit" class="btn btn-danger" 
+                      <button id="cart-button" class="btn btn-danger" 
                         onClick={() => deleteBook(props.cartItem, props.userID)}>Delete
                       </button>
                       <div>

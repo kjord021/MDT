@@ -15,10 +15,10 @@ function Nav(props){
             <nav className="navbar navbar-expand-lg navbar-light bg-dark" id="nav">
                     <ul className="navbar-nav mr-auto" id="nav">
                         <li className="nav-item active" id="nav">
-                            <Link to="/" className="nav-link" id="nav">Home</Link>
+                            <Link to="/" className="nav-link" id="nav-link">Home</Link>
                         </li>
                         <li className="nav-item active">
-                            <Link to="/MyAccount" className="nav-link" id="nav">My account</Link>
+                            <Link to="/MyAccount" className="nav-link" id="nav-link">My account</Link>
                         </li>
                     </ul>
                     <div>
@@ -32,13 +32,13 @@ function Nav(props){
             <nav className="navbar navbar-expand-lg navbar-light bg-dark" id="nav">
                 <ul className="navbar-nav mr-auto" id="nav">
                     <li className="nav-item active" id="nav">
-                        <Link to="/" className="nav-link" id="nav">Home</Link>
+                        <Link to="/" className="nav-link" id="nav-link">Home</Link>
                     </li>
                     <li className="nav-item active">
-                        <Link to="/Login" className="nav-link" id="nav">Login</Link>
+                        <Link to="/Login" className="nav-link" id="nav-link">Login</Link>
                     </li>
                     <li className="nav-item active">
-                        <Link to="/Register" className="nav-link" id="nav">Register</Link>
+                        <Link to="/Register" className="nav-link" id="nav-link">Register</Link>
                     </li>
                 </ul>
                 <div>

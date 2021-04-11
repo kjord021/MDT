@@ -30,12 +30,12 @@ function SaveLater(props) {
     return (
         <div class="card save-card">
             <img class="card-img-top" src={props.book.cover} />
-                <div class="card-body">
+                <div class="card-body" id="save-card">
                     <h5 class="card-title">{props.book.title}</h5>
                     <p class="card-text">{props.book.author}</p>
-                    <div class="row">
+                    <div class="row">&nbsp;&nbsp;&nbsp;
                         <button type="submit" class="btn btn-danger" onClick={() => {deleteBook(props.book, props.userID)}}>Delete</button>
-                        &nbsp;
+                        &nbsp;&nbsp;&nbsp;
                         <button type="submit" class="btn btn-success" onClick={() => {addCart(props.book, props.userID)}}>Move to Cart</button>
                     </div>
                 </div>
