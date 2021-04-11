@@ -50,7 +50,7 @@ function CartInfo(props) {
                   </div>
                   <div id="cart-item-center" class="col-md-7">
                       <h3 class="card-title cart-title">{props.book.title}</h3>
-                      <h5 id="bookauthor" class="card-title">By {props.book.author}</h5>
+                      <h5 id="bookauthor-cart" class="card-title">By {props.book.author}</h5>
                       <div class="cart-card-p">
                           <div>
                               Quantity: 
