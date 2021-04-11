@@ -36,10 +36,10 @@ function Cart(props) {
     if (!props.isLoggedIn()) {
         return (<Redirect to='/Login' />);
     }
-
     if (isLoading) {
         return <div>Loading...</div>
       }
+      
     cart.map(item => totalCost = totalCost + parseFloat(item.book.price?.$numberDecimal) * parseFloat(item.quantity))
     return (
         <div>
@@ -58,7 +58,7 @@ function Cart(props) {
           <div class="container">
             <h1>Save for Later </h1>
             <div class="row">
-            {save.map(item => <div class="col-sm-6" key={item._id}><SaveLater book={item.book} userID={props.userID} setRender={setRender} render={render}/><br/></div>)}
+                {save.map(item => <div class="col-sm-6" key={item._id}><SaveLater book={item.book} userID={props.userID} setRender={setRender} render={render}/><br/></div>)}
             </div>
             <br/>
           </div>
