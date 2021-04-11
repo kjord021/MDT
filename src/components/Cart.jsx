@@ -17,13 +17,14 @@ function Cart(props) {
         .then((response) => {
             setCart([])
             setSave([])
-            response.data.cart.map((item, i) => {
+
+            response.data.cart.map((item) => {
                 axios.get("http://localhost:5000/books/book/id", {params: {_id:item.book}})
                 .then((response) => {
                     setCart(cart => [...cart, {_id:item._id, quantity:item.quantity, book:response.data}]);
                 })
             });
-            response.data.saveForLater.map((item, i) => {
+            response.data.saveForLater.map((item) => {
                 axios.get("http://localhost:5000/books/book/id", {params: {_id:item.book}})
                 .then((response) => {
                     setSave(cart => [...cart, {_id:item._id, quantity:item.quantity, book:response.data}])
