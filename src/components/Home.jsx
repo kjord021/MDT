@@ -87,6 +87,83 @@ function Home(props){
 
 
     }
+
+
+      if(selectedOption === "Top Sellers"){
+
+      const temp = setDBooks([].concat(books).filter( choice =>{
+
+          return choice.top === true;
+
+        }));}
+
+      if(selectedOption === "Juvenile Fiction"){
+
+      const temp = setDBooks([].concat(books).filter( choice =>{
+
+          return choice.genre === "Juvenile Fiction";
+
+        }));}
+
+      if(selectedOption === "Horror"){
+
+      const temp = setDBooks([].concat(books).filter( choice =>{
+
+          return choice.genre === "Horror";
+
+        }));}
+
+      if(selectedOption === "Memoir"){
+
+      const temp = setDBooks([].concat(books).filter( choice =>{
+
+          return choice.genre === "Memoir";
+
+        }));}
+
+        if(selectedOption === "⭐"){
+
+        const temp = setDBooks([].concat(books).filter( choice =>{
+
+            return choice.rating >= 1;
+
+          }));}
+          if(selectedOption === "⭐⭐"){
+
+          const temp = setDBooks([].concat(books).filter( choice =>{
+
+              return choice.rating >= 2;
+
+            }));}
+
+            if(selectedOption === "⭐⭐⭐"){
+
+            const temp = setDBooks([].concat(books).filter( choice =>{
+
+                return choice.rating >= 3;
+
+              }));}
+
+              if(selectedOption === "⭐⭐⭐⭐"){
+
+              const temp = setDBooks([].concat(books).filter( choice =>{
+
+                  return choice.rating >= 4;
+
+                }));}
+
+                if(selectedOption === "⭐⭐⭐⭐⭐"){
+
+                const temp = setDBooks([].concat(books).filter( choice =>{
+
+                    return choice.rating === 5;
+
+                  }));}
+
+      //const temp = words.filter(word => word.length > 6);
+
+
+
     /*
     tempBooks.filter((book) => {
    if (book.date > 5)
@@ -101,7 +178,9 @@ return true;
 
 
 return (
+
   <>
+
   <form onSubmit={formSubmit}>
       <div className="radio">
     <label>
@@ -159,6 +238,131 @@ return (
             Book Rating
           </label>
         </div>
+
+        <br>
+        </br>
+        <p>Top selling in our store</p>
+
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="Top Sellers"
+              checked={selectedOption === "Top Sellers"}
+              onChange={onValueChange}
+            />
+            Top Sellers
+          </label>
+        </div>
+
+        <br>
+        </br>
+
+        <p>Filter by Genre</p>
+
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="Juvenile Fiction"
+              checked={selectedOption === "Juvenile Fiction"}
+              onChange={onValueChange}
+            />
+            Juvenile Fiction
+          </label>
+        </div>
+
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="Horror"
+              checked={selectedOption === "Horror"}
+              onChange={onValueChange}
+            />
+            Horror
+          </label>
+        </div>
+
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="Memoir"
+              checked={selectedOption === "Memoir"}
+              onChange={onValueChange}
+            />
+            Memoir
+          </label>
+        </div>
+
+        <br>
+        </br>
+        <p>Filter by rating</p>
+
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="⭐"
+              checked={selectedOption === "⭐"}
+              onChange={onValueChange}
+            />
+            ⭐
+          </label>
+        </div>
+
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="⭐⭐"
+              checked={selectedOption === "⭐⭐"}
+              onChange={onValueChange}
+            />
+            ⭐⭐
+          </label>
+        </div>
+
+
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="⭐⭐⭐"
+              checked={selectedOption === "⭐⭐⭐"}
+              onChange={onValueChange}
+            />
+            ⭐⭐⭐
+          </label>
+        </div>
+
+
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="⭐⭐⭐⭐"
+              checked={selectedOption === "⭐⭐⭐⭐"}
+              onChange={onValueChange}
+            />
+            ⭐⭐⭐⭐
+          </label>
+        </div>
+
+
+        <div className="radio">
+          <label>
+            <input
+              type="radio"
+              value="⭐⭐⭐⭐⭐"
+              checked={selectedOption === "⭐⭐⭐⭐⭐"}
+              onChange={onValueChange}
+            />
+            ⭐⭐⭐⭐⭐
+          </label>
+        </div>
+
         <div>
           Selected option is : {selectedOption}
         </div>
@@ -186,6 +390,10 @@ return (
               title = {book.title}
               imgsrc = {book.cover}
               description = {book.description}
+
+            price = {book.price}
+            rating = {book.rating}
+
               setBookID = {props.setBookID}
               bookID = {book._id}
               />
@@ -193,6 +401,7 @@ return (
           )}
       </div>
    </div>
+
   </>
 );
 
